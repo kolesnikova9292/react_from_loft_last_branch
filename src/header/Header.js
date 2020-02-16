@@ -4,13 +4,16 @@ function Header(props) {
   return (
     <div>
       jhgkjhgkj
-      <div onClick={props.showMapEvent} id="my-map">
+      <div onClick={() => props.showMapEvent("my-map")} id="my-map">
         Карта
       </div>
-      <div onClick={props.showMapEvent} id="personal-area">
+      <div
+        onClick={() => props.showMapEvent("personal-area")}
+        id="personal-area"
+      >
         Личный кабинет
       </div>
-      <div onClick={props.showMapEvent} id="logout">
+      <div onClick={() => props.showMapEvent("logout")} id="logout">
         Выйти
       </div>
     </div>

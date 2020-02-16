@@ -20,9 +20,10 @@ class App extends React.Component {
     this.setState({ showMap: true });
   }*/
 
-  showMapEvent(e) {
+  showMapEvent(idOfButton) {
     console.log(11111);
-    const idOfButton = e.target.id;
+    console.log(idOfButton);
+    // const idOfButton = e.target.id;
     switch (idOfButton) {
       case "my-map":
         this.setState({ showPage: 0 });
@@ -45,7 +46,10 @@ class App extends React.Component {
     return (
       <>
         <Header showMapEvent={this.showMapEvent} />
-        <ChoosePage showPage={this.state.showPage} />
+        <ChoosePage
+          showPage={this.state.showPage}
+          showMapEvent={this.showMapEvent}
+        />
       </>
     );
   }

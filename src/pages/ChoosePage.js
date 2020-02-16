@@ -1,7 +1,7 @@
 import React from "react";
 import { Map } from "./Map";
 import { PersonalArea } from "./PersonalArea";
-import { Logout } from "./Logout";
+import { Login } from "./Login";
 
 function ChoosePage(props) {
   console.log(props);
@@ -10,7 +10,9 @@ function ChoosePage(props) {
       <h1>Компонента</h1>
       <div>{props.showPage === 0 && <Map />}</div>
       <div>{props.showPage === 1 && <PersonalArea />}</div>
-      <div>{props.showPage === 2 && <Logout />}</div>
+      <div>
+        {props.showPage === 2 && <Login showMapEvent={props.showMapEvent} />}
+      </div>
     </>
   );
 }
