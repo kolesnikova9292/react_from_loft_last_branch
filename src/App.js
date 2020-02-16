@@ -34,6 +34,9 @@ class App extends React.Component {
       case "logout":
         this.setState({ showPage: 2 });
         break;
+      case "registration":
+        this.setState({ showPage: 3 });
+        break;
       default:
         break;
     }

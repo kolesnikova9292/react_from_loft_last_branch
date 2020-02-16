@@ -1,45 +1,23 @@
 import React from "react";
 
-class Login extends React.Component {
-  /*constructor(props) {
-    super(props);
-
-    this.state = {
-      login: "",
-      password: ""
-    };
-    this.handleLogIn = this.handleLogIn.bind(this);
-    this.handleLoginChange = this.handleLoginChange.bind(this);
-  }*/
-
-  state = { login: "", password: "" };
+class Registration extends React.Component {
+  state = { login: "", password: "", firstname: "", lastname: "" };
 
   handleLogIn = event => {
     event.preventDefault();
     console.log(this.state.login);
     console.log(this.state.password);
+    console.log(this.state.firstname);
+    console.log(this.state.lastname);
     this.props.showMapEvent("my-map");
-  };
-
-  goToRegistration = event => {
-    event.preventDefault();
-    this.props.showMapEvent("registration");
   };
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  /*handleLoginChange = event => {
-    this.setState({ login: event.target.value });
-  };
-
-  handlePasswordChange = event => {
-    this.setState({ password: event.target.value });
-  };*/
-
   render() {
-    const { login, password } = this.state;
+    const { login, password, lastname, firstname } = this.state;
     return (
       <>
         <h1>Выйти</h1>
@@ -67,14 +45,35 @@ class Login extends React.Component {
             </label>
           </div>
           <div>
-            <input type="submit" value="Войти" />
+            <label>
+              Фамилия:
+              <input
+                type="text"
+                name="lastname"
+                value={lastname}
+                onChange={this.handleChange}
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              Имя:
+              <input
+                type="text"
+                name="firstname"
+                value={firstname}
+                onChange={this.handleChange}
+              />
+            </label>
+          </div>
+          <div>
+            <input type="submit" value="Регистрация" />
           </div>
         </form>
-        <button onClick={this.goToRegistration}>Перейти на регистрацию</button>
       </>
     );
   }
 }
 
 //export default Header;
-export { Login };
+export { Registration };
