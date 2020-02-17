@@ -10,7 +10,7 @@ class App extends React.Component {
 
     this.state = {
       //showMap: false
-      showPage: 0
+      showPage: 0,
     };
     this.showMapEvent = this.showMapEvent.bind(this);
   }
