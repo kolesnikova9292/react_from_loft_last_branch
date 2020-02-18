@@ -1,17 +1,16 @@
 import React from "react";
+import { LoginForm } from "./LoginForm";
 
-class Login extends React.Component {
-  /*constructor(props) {
-    super(props);
+export const Login = ({ showMapEvent }) => {
+  return (
+    <>
+      <h1>Login</h1>
+      <LoginForm showMapEvent={showMapEvent} />
+    </>
+  );
+};
 
-    this.state = {
-      login: "",
-      password: ""
-    };
-    this.handleLogIn = this.handleLogIn.bind(this);
-    this.handleLoginChange = this.handleLoginChange.bind(this);
-  }*/
-
+/*class Login extends React.Component {
   state = { login: "", password: "" };
 
   handleLogIn = event => {
@@ -30,13 +29,6 @@ class Login extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  /*handleLoginChange = event => {
-    this.setState({ login: event.target.value });
-  };
-
-  handlePasswordChange = event => {
-    this.setState({ password: event.target.value });
-  };*/
 
   render() {
     const { login, password } = this.state;
@@ -74,7 +66,7 @@ class Login extends React.Component {
       </>
     );
   }
-}
+}*/
 
 //export default Header;
-export { Login };
+//export { Login };

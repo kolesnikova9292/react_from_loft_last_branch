@@ -1,8 +1,7 @@
 import React from "react";
 
-function Map() {
+export const Map = () => {
   return <h1>Карта</h1>;
-}
+};
 
 //export default Header;
-export { Map };

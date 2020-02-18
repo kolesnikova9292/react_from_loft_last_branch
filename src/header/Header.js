@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header(props) {
+export const Header = props => {
   return (
     <div>
       jhgkjhgkj
@@ -18,7 +18,7 @@ function Header(props) {
       </div>
     </div>
   );
-}
+};
 
 //render() {
 //return (<button onClick={this.props.handler}></button>);
@@ -48,4 +48,4 @@ function Header(props) {
 }*/
 
 //export default Header;
-export { Header };
+//export { Header };

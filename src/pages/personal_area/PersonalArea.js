@@ -1,8 +1,7 @@
 import React from "react";
 
-function PersonalArea() {
+export const PersonalArea = () => {
   return <h1>Личные данные</h1>;
-}
+};
 
 //export default Header;
-export { PersonalArea };
