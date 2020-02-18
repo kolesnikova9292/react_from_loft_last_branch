@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-export const Registration = ({ showMapEvent }) => {
-  //state = { login: "", password: "", firstname: "", lastname: "" };
-
+export const RegistrationForm = ({ showMapEvent }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");

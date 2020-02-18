@@ -2,10 +2,9 @@ import React from "react";
 import { Map } from "./map/Map";
 import { PersonalArea } from "./personal_area/PersonalArea";
 import { Login } from "./login";
-import { Registration } from "./Registration";
+import { Registration } from "./registration";
 
 export const ChoosePage = ({ showPage, showMapEvent }) => {
-  //console.log(props);
   return (
     <>
       <h1>Компонента</h1>
@@ -18,6 +17,3 @@ export const ChoosePage = ({ showPage, showMapEvent }) => {
     </>
   );
 };
-
-//export default Header;
-//export { ChoosePage };

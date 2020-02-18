@@ -1,71 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { Header } from "./header/Header";
 import { ChoosePage } from "./pages/ChoosePage";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [showPage, setShowPage] = useState(0);
 
-    this.state = {
-      //showMap: false
-      showPage: 0,
-    };
-    this.showMapEvent = this.showMapEvent.bind(this);
-  }
-
-  /*showMapEvent(e) {
-    console.log(11111);
-    this.setState({ showMap: true });
-  }*/
-
-  showMapEvent(idOfButton) {
-    console.log(11111);
-    console.log(idOfButton);
-    // const idOfButton = e.target.id;
+  const showMapEvent = idOfButton => {
     switch (idOfButton) {
       case "my-map":
-        this.setState({ showPage: 0 });
+        setShowPage(0);
         break;
       case "personal-area":
-        this.setState({ showPage: 1 });
+        setShowPage(1);
         break;
       case "logout":
-        this.setState({ showPage: 2 });
+        setShowPage(2);
         break;
       case "registration":
-        this.setState({ showPage: 3 });
+        setShowPage(3);
         break;
       default:
         break;
     }
-    //console.log(qwe);
+  };
 
-    //this.setState({ showMap: true });
-  }
-
-  render() {
-    return (
-      <>
-        <Header showMapEvent={this.showMapEvent} />
-        <ChoosePage
-          showPage={this.state.showPage}
-          showMapEvent={this.showMapEvent}
-        />
-      </>
-    );
-  }
-}
-
-/*function App() {
-  //console.log({ children });
   return (
-    <div>
-      <Header />
-      <ChoosePage />
-    </div>
+    <>
+      <Header showMapEvent={showMapEvent} />
+      <ChoosePage showPage={showPage} showMapEvent={showMapEvent} />
+    </>
   );
-}*/
+};
 
 export default App;
