@@ -7,7 +7,6 @@ import { Registration } from "./registration";
 export const ChoosePage = ({ showPage, showMapEvent }) => {
   return (
     <>
-      <h1>Компонента</h1>
       <div>{showPage === 0 && <Map />}</div>
       <div>{showPage === 1 && <PersonalArea />}</div>
       <div>{showPage === 2 && <Login showMapEvent={showMapEvent} />}</div>

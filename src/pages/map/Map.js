@@ -1,5 +1,10 @@
 import React from "react";
+import { MapField } from "./MapField";
 
 export const Map = () => {
-  return <h1>Карта</h1>;
+  return (
+    <>
+      <MapField />
+    </>
+  );
 };
