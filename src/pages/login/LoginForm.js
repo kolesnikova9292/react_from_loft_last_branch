@@ -1,13 +1,18 @@
 import React, { useState } from "react";
+import { CountStateContext } from "../../providers/AuthContext";
 
 export const LoginForm = ({ showMapEvent }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
+  const loginFromContext = React.useContext(CountStateContext);
+  console.log(loginFromContext);
+
   const handleLogIn = event => {
     event.preventDefault();
     console.log(login);
     console.log(password);
+    //loginFromContext();
     showMapEvent("my-map");
   };
 

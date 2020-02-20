@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Header } from "./header/Header";
 import { ChoosePage } from "./pages/ChoosePage";
+import { CountProvider } from "./providers/AuthContext";
 
 const App = () => {
   const [showPage, setShowPage] = useState(0);
@@ -28,8 +29,10 @@ const App = () => {
 
   return (
     <>
-      <Header showMapEvent={showMapEvent} />
-      <ChoosePage showPage={showPage} showMapEvent={showMapEvent} />
+      <CountProvider>
+        <Header showMapEvent={showMapEvent} />
+        <ChoosePage showPage={showPage} showMapEvent={showMapEvent} />
+      </CountProvider>
     </>
   );
 };
