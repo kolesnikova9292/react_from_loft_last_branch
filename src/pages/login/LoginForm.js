@@ -12,6 +12,7 @@ export const LoginForm = ({ showMapEvent }) => {
     event.preventDefault();
     console.log(login);
     console.log(password);
+    loginFromContext.loginContext();
     //loginFromContext();
     showMapEvent("my-map");
   };
