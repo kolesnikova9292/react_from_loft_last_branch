@@ -1,0 +1,11 @@
+.divForForm{
+    margin: 0 auto;
+    width:200px;
+    margin-top: 3%;
+}
+
+.cardForForm{
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+}

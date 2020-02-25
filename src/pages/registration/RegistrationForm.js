@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
+import "./Registration.css";
+import Card from "@material-ui/core/Card";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import PropTypes from "prop-types";
 
 export const RegistrationForm = ({ showMapEvent }) => {
   const [login, setLogin] = useState("");
@@ -32,57 +37,52 @@ export const RegistrationForm = ({ showMapEvent }) => {
   };
 
   return (
-    <>
-      <h1>Выйти</h1>
-      <form onSubmit={handleRegistration}>
-        <div>
-          <label>
-            Логин:
-            <input
-              type="text"
-              value={login}
-              name="login"
-              onChange={handleLoginChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Пароль:
-            <input
-              type="text"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Фамилия:
-            <input
-              type="text"
-              name="lastname"
-              value={lastname}
-              onChange={handleLastnameChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Имя:
-            <input
-              type="text"
-              name="firstname"
-              value={firstname}
-              onChange={handleFirstnameChange}
-            />
-          </label>
-        </div>
-        <div>
-          <input type="submit" value="Регистрация" />
-        </div>
-      </form>
-    </>
+    <div className="divForForm">
+      <Card className="cardForForm">
+        <form onSubmit={handleRegistration}>
+          <TextField
+            id="standard-secondary"
+            label="Логин"
+            color="secondary"
+            type="text"
+            value={login}
+            name="login"
+            onChange={handleLoginChange}
+          />
+          <TextField
+            id="standard-secondary"
+            label="Пароль"
+            color="secondary"
+            type="text"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <TextField
+            id="standard-secondary"
+            label="Фамилия"
+            color="secondary"
+            type="text"
+            name="lastname"
+            value={lastname}
+            onChange={handleLastnameChange}
+          />
+          <TextField
+            id="standard-secondary"
+            label="Имя"
+            color="secondary"
+            type="text"
+            name="firstname"
+            value={firstname}
+            onChange={handleFirstnameChange}
+          />
+          <div>
+            <Button type="submit" value="">
+              Регистрация
+            </Button>
+          </div>
+        </form>
+      </Card>
+    </div>
   );
 };
