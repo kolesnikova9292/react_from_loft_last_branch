@@ -1,20 +1,7 @@
 import React, { useState } from "react";
-const CountStateContext = React.createContext();
+const AuthContext = React.createContext();
 
-function countReducer(state, action) {
-  switch (action.type) {
-    case "increment": {
-      return { count: state.count + 1 };
-    }
-    case "decrement": {
-      return { count: state.count - 1 };
-    }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
-    }
-  }
-}
-function CountProvider({ children }) {
+function AuthProvider({ children }) {
   //static displayName = 'authHoc';
   //const [state, dispatch] = React.useReducer(countReducer, { count: 0 });
   const [isAuthorized, setisAuthorized] = useState(false);
@@ -29,7 +16,7 @@ function CountProvider({ children }) {
   };
 
   return (
-    <CountStateContext.Provider
+    <AuthContext.Provider
       value={{
         isAuthorized,
         loginContext: loginContext,
@@ -37,10 +24,10 @@ function CountProvider({ children }) {
       }}
     >
       {children}
-    </CountStateContext.Provider>
+    </AuthContext.Provider>
   );
 }
-export { CountStateContext, CountProvider };
+export { AuthContext, AuthProvider };
 
 /*import React, { Component } from "react";
 

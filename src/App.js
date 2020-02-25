@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Header } from "./header/Header";
 import { ChoosePage } from "./pages/ChoosePage";
-import { CountProvider } from "./providers/AuthContext";
+import { AuthProvider } from "./providers/AuthContext";
 
 const App = () => {
   const [showPage, setShowPage] = useState(0);
@@ -29,10 +29,10 @@ const App = () => {
 
   return (
     <>
-      <CountProvider>
+      <AuthProvider>
         <Header showMapEvent={showMapEvent} />
         <ChoosePage showPage={showPage} showMapEvent={showMapEvent} />
-      </CountProvider>
+      </AuthProvider>
     </>
   );
 };

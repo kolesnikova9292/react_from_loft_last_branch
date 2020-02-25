@@ -1,7 +1,7 @@
 import React from "react";
 import { Header } from "../header/Header";
 import { Login } from "../pages/login";
-import { CountStateContext, CountProvider } from "../providers/AuthContext";
+import { AuthContext } from "../providers/AuthContext";
 import { render, fireEvent } from "@testing-library/react";
 import { testHook, cleanup } from "@testing-library/react";
 
@@ -12,7 +12,7 @@ describe("Header", () => {
     let onActionMock3 = jest.fn();
     it("find personal area in header", () => {
       const { getByText, container } = render(
-        <CountStateContext.Provider
+        <AuthContext.Provider
           value={{
             isAuthorized: false,
             loginContext: onActionMock1,
@@ -20,13 +20,14 @@ describe("Header", () => {
           }}
         >
           <Login showMapEvent={onActionMock3} />
-        </CountStateContext.Provider>
+        </AuthContext.Provider>
       );
 
       const loginbutton = getByText("Войти");
-
+      //console.log(loginbutton);
       expect(loginbutton).not.toBeNull();
-      fireEvent.click(loginbutton);
+      fireEvent.submit(loginbutton);
+
       expect(onActionMock1).toBeCalled();
     });
   });

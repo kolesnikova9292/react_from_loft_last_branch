@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CountStateContext } from "../../providers/AuthContext";
+import { AuthContext } from "../../providers/AuthContext";
 import TextField from "@material-ui/core/TextField";
 import "./Login.css";
 import Card from "@material-ui/core/Card";
@@ -9,11 +9,12 @@ export const LoginForm = ({ showMapEvent }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const loginFromContext = React.useContext(CountStateContext);
-  console.log(loginFromContext);
+  const loginFromContext = React.useContext(AuthContext);
+  //console.log(loginFromContext);
 
   const handleLogIn = event => {
     event.preventDefault();
+    console.log(111111);
     console.log(login);
     console.log(password);
     loginFromContext.loginContext();
@@ -58,7 +59,6 @@ export const LoginForm = ({ showMapEvent }) => {
             onChange={handleChangePassword}
           />
           <br />
-
           <Button type="submit" value="Войти">
             Войти
           </Button>
@@ -69,7 +69,11 @@ export const LoginForm = ({ showMapEvent }) => {
   );
 };
 
-/*return (
+/*
+ <Button type="submit" value="Войти">
+            Войти
+          </Button>
+return (
     <>
       <form onSubmit={handleLogIn}>
         <div>
