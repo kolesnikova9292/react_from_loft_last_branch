@@ -62,7 +62,6 @@ describe("Header", () => {
 
       const node = getByText("Выйти");
       fireEvent.click(node);
-
       expect(onActionMock).toHaveBeenCalledWith("logout");
     });
   });

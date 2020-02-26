@@ -2,7 +2,7 @@ import React from "react";
 import App from "../App";
 import { AuthContext } from "../providers/AuthContext";
 import { Login } from "../pages/login/index";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 
 describe("Login", () => {
   describe("rendering of login", () => {
@@ -24,6 +24,8 @@ describe("Login", () => {
       );
       const items = getByText("Войти");
       expect(items).not.toBeNull();
+      fireEvent.submit(items);
+      expect(onActionMock1).toBeCalled();
     });
     it("check rendering fields", () => {
       let onActionMock = jest.fn();
@@ -57,7 +59,7 @@ describe("Login", () => {
       const items = getByText("Пароль");
       expect(items).not.toBeNull();
     });
-    it("check rendering fields", () => {
+    it("check rendering registration button", () => {
       let onActionMock = jest.fn();
       const { getByText } = render(
         <AuthContext.Provider
@@ -72,6 +74,24 @@ describe("Login", () => {
       );
       const items = getByText("Перейти на регистрацию");
       expect(items).not.toBeNull();
+      fireEvent.submit(items);
+      expect(onActionMock1).toBeCalled();
+    });
+
+    it("check rendering logout context function", () => {
+      let onActionMock = jest.fn();
+      const { getByText } = render(
+        <AuthContext.Provider
+          value={{
+            isAuthorized: true,
+            loginContext: onActionMock1,
+            logout: onActionMock2,
+          }}
+        >
+          <Login showMapEvent={onActionMock} />
+        </AuthContext.Provider>
+      );
+      expect(onActionMock2).toBeCalled();
     });
   });
 });
