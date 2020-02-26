@@ -3,7 +3,7 @@ import "./Registration.css";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import PropTypes from "prop-types";
+import { AuthContext } from "../../providers/AuthContext";
 
 export const RegistrationForm = ({ showMapEvent }) => {
   const [login, setLogin] = useState("");
@@ -11,12 +11,15 @@ export const RegistrationForm = ({ showMapEvent }) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
 
+  const loginFromContext = React.useContext(AuthContext);
+
   const handleRegistration = event => {
     event.preventDefault();
     console.log(login);
     console.log(password);
     console.log(firstname);
     console.log(lastname);
+    loginFromContext.loginContext();
     showMapEvent("my-map");
   };
 

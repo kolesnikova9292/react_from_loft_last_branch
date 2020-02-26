@@ -10,6 +10,7 @@ export const LoginForm = ({ showMapEvent }) => {
   const [password, setPassword] = useState("");
 
   const loginFromContext = React.useContext(AuthContext);
+  loginFromContext.logout();
   //console.log(loginFromContext);
 
   const handleLogIn = event => {

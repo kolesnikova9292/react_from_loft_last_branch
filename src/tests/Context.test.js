@@ -5,12 +5,12 @@ import { AuthContext } from "../providers/AuthContext";
 import { render, fireEvent } from "@testing-library/react";
 import { testHook, cleanup } from "@testing-library/react";
 
-describe("Header", () => {
+describe("Context", () => {
   describe("rendering of header", () => {
     let onActionMock1 = jest.fn();
     let onActionMock2 = jest.fn();
     let onActionMock3 = jest.fn();
-    it("find personal area in header", () => {
+    it("check context method runs", () => {
       const { getByText, container } = render(
         <AuthContext.Provider
           value={{

@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import { Logo } from "loft-taxi-mui-theme";
+import { AuthContext } from "../providers/AuthContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const Header = props => {
+  const loginFromContext = React.useContext(AuthContext);
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -29,27 +31,39 @@ export const Header = props => {
         <Toolbar>
           <Logo edge="start" color="inherit" aria-label="menu"></Logo>
           <Typography variant="h6" className={classes.title}></Typography>
-          <Button
-            color="inherit"
-            onClick={() => props.showMapEvent("my-map")}
-            id="my-map"
-          >
-            Карта
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => props.showMapEvent("personal-area")}
-            id="personal-area"
-          >
-            Профиль
-          </Button>
-          <Button
-            color="inherit"
-            onClick={() => props.showMapEvent("logout")}
-            id="logout"
-          >
-            Войти
-          </Button>
+          {loginFromContext.isAuthorized === true ? (
+            <>
+              <Button
+                color="inherit"
+                onClick={() => props.showMapEvent("my-map")}
+                id="my-map"
+              >
+                Карта
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => props.showMapEvent("personal-area")}
+                id="personal-area"
+              >
+                Профиль
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => props.showMapEvent("logout")}
+                id="logout"
+              >
+                Выйти
+              </Button>
+            </>
+          ) : (
+            <Button
+              color="inherit"
+              onClick={() => props.showMapEvent("logout")}
+              id="logout"
+            >
+              Войти
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </div>

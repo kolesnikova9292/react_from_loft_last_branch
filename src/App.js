@@ -6,7 +6,7 @@ import { ChoosePage } from "./pages/ChoosePage";
 import { AuthProvider } from "./providers/AuthContext";
 
 const App = () => {
-  const [showPage, setShowPage] = useState(0);
+  const [showPage, setShowPage] = useState(2);
 
   const showMapEvent = idOfButton => {
     switch (idOfButton) {
