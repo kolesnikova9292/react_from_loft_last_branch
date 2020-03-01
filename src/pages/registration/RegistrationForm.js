@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { AuthContext } from "../../providers/AuthContext";
 
-export const RegistrationForm = ({ showMapEvent }) => {
+export const RegistrationForm = props => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -25,7 +25,8 @@ export const RegistrationForm = ({ showMapEvent }) => {
     console.log(answer);
     if (answer.success === true) {
       localStorage.setItem("accessToken", answer.token);
-      showMapEvent("my-map");
+      props.history.push("/map");
+      //showMapEvent("my-map");
     }
   };
 

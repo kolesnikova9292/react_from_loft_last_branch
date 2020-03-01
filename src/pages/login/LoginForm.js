@@ -4,20 +4,53 @@ import TextField from "@material-ui/core/TextField";
 import "./Login.css";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
+import { Redirect } from "react-router-dom";
 
-export const LoginForm = ({ showMapEvent, alreadyLoggedIn }) => {
+export const LoginForm = props => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
   const loginFromContext = React.useContext(AuthContext);
 
-  if (alreadyLoggedIn === true) {
+  /*if (loginFromContext.isAuthorized === true) {
+    if (window.confirm("Вы уверены, что хотите выйти?")) {
+      loginFromContext.logout();
+      //showMapEvent("login");
+
+      localStorage.removeItem("accessToken");
+      return <Redirect to="/login" />;
+    } else {
+      return <Redirect to="/map" />;
+    }
+  }*/
+
+  if (localStorage.getItem("accessToken") !== null) {
+    if (window.confirm("Вы уверены, что хотите выйти?")) {
+      loginFromContext.logout();
+      //showMapEvent("login");
+
+      localStorage.removeItem("accessToken");
+      return <Redirect to="/login" />;
+    } else {
+      return <Redirect to="/map" />;
+    }
+  }
+
+  /*if (alreadyLoggedIn === true) {
     if (window.confirm("Вы уверены, что хотите выйти?")) {
       loginFromContext.logout();
       showMapEvent("login");
       localStorage.removeItem("accessToken");
     }
-  }
+  }*/
+
+  /*if (alreadyLoggedIn === true) {
+    if (window.confirm("Вы уверены, что хотите выйти?")) {
+      loginFromContext.logout();
+      showMapEvent("login");
+      localStorage.removeItem("accessToken");
+    }
+  }*/
 
   const handleLogIn = async event => {
     event.preventDefault();
@@ -27,13 +60,17 @@ export const LoginForm = ({ showMapEvent, alreadyLoggedIn }) => {
 
     if (answer !== undefined && answer.success === true) {
       localStorage.setItem("accessToken", answer.token);
-      showMapEvent("my-map");
+      console.log(7878787);
+      //showMapEvent("my-map");
+      //return <Redirect to="/map" />;
+      props.history.push("/map");
     }
   };
 
   const goToRegistration = event => {
     event.preventDefault();
-    showMapEvent("registration");
+    props.history.push("/registration");
+    //showMapEvent("registration");
   };
 
   const handleChangeLogin = event => {
@@ -49,7 +86,6 @@ export const LoginForm = ({ showMapEvent, alreadyLoggedIn }) => {
       <Card className="cardForForm">
         <form onSubmit={handleLogIn}>
           <TextField
-            id="standard-secondary"
             label="Логин"
             color="secondary"
             type="text"
@@ -59,7 +95,6 @@ export const LoginForm = ({ showMapEvent, alreadyLoggedIn }) => {
           />
           <br />
           <TextField
-            id="standard-secondary"
             label="Пароль"
             color="secondary"
             type="text"

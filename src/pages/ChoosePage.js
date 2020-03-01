@@ -3,25 +3,23 @@ import { Map } from "./map/Map";
 import { PersonalArea } from "./personal_area/PersonalArea";
 import { Login } from "./login";
 import { Registration } from "./registration";
+import { Route } from "react-router-dom";
+import { AuthContext } from "../providers/AuthContext";
 
-export const ChoosePage = ({ showPage, showMapEvent }) => {
+export const ChoosePage = () => {
+  const loginFromContext = React.useContext(AuthContext);
   return (
     <>
-      <div>{showPage === 0 && <Map />}</div>
-      <div>{showPage === 1 && <PersonalArea />}</div>
-      <div>
-        {showPage === 2 && (
-          <Login showMapEvent={showMapEvent} alreadyLoggedIn={true} />
-        )}
-      </div>
-      <div>
-        {showPage === 3 && <Registration showMapEvent={showMapEvent} />}
-      </div>
-      <div>
-        {showPage === 4 && (
-          <Login showMapEvent={showMapEvent} alreadyLoggedIn={false} />
-        )}
-      </div>
+      <Route path="/map" component={Map} exact />
+      <Route path="/personal" component={PersonalArea} exact />
+      <Route path="/registration" component={Registration} exact />
+      <Route path="/login" component={Login} exact />
+      <Route path="/logout" component={Login} exact />
+      <Route
+        path="/"
+        component={loginFromContext.isAuthorized == true ? Map : Login}
+        exact
+      />
     </>
   );
 };

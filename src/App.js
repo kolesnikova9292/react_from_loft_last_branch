@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import { Header } from "./header/Header";
@@ -37,10 +38,12 @@ const App = () => {
 
   return (
     <>
-      <AuthProvider>
-        <Header showMapEvent={showMapEvent} />
-        <ChoosePage showPage={showPage} showMapEvent={showMapEvent} />
-      </AuthProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <Header />
+          <ChoosePage />
+        </AuthProvider>
+      </BrowserRouter>
     </>
   );
 };
