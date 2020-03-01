@@ -11,15 +11,12 @@ export const LoginForm = ({ showMapEvent }) => {
 
   const loginFromContext = React.useContext(AuthContext);
   loginFromContext.logout();
-  //console.log(loginFromContext);
 
   const handleLogIn = event => {
     event.preventDefault();
-    console.log(111111);
     console.log(login);
     console.log(password);
     loginFromContext.loginContext();
-    //loginFromContext();
     showMapEvent("my-map");
   };
 
@@ -69,41 +66,3 @@ export const LoginForm = ({ showMapEvent }) => {
     </div>
   );
 };
-
-/*
- <Button type="submit" value="Войти">
-            Войти
-          </Button>
-return (
-    <>
-      <form onSubmit={handleLogIn}>
-        <div>
-          <label>
-            Логин:
-            <input
-              type="text"
-              value={login}
-              name="login"
-              onChange={handleChangeLogin}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Пароль:
-            <input
-              type="text"
-              name="password"
-              value={password}
-              onChange={handleChangePassword}
-            />
-          </label>
-        </div>
-        <div>
-          <input type="submit" value="Войти" />
-        </div>
-      </form>
-      <button onClick={goToRegistration}>Перейти на регистрацию</button>
-    </>
-  );
-};*/

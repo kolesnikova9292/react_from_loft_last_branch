@@ -67,19 +67,5 @@ export const Header = props => {
         </Toolbar>
       </AppBar>
     </div>
-    /*<div>
-      <div onClick={() => props.showMapEvent("my-map")} id="my-map">
-        Карта
-      </div>
-      <div
-        onClick={() => props.showMapEvent("personal-area")}
-        id="personal-area"
-      >
-        Личный кабинет
-      </div>
-      <div onClick={() => props.showMapEvent("logout")} id="logout">
-        Выйти
-      </div>
-    </div>*/
   );
 };
