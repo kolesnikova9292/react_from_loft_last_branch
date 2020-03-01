@@ -79,6 +79,7 @@ describe("Login", () => {
     });
 
     it("check rendering logout context function", () => {
+      window.confirm = jest.fn();
       let onActionMock = jest.fn();
       const { getByText } = render(
         <AuthContext.Provider
@@ -88,10 +89,13 @@ describe("Login", () => {
             logout: onActionMock2,
           }}
         >
-          <Login showMapEvent={onActionMock} />
+          <Login showMapEvent={onActionMock} alreadyLoggedIn={true} />
         </AuthContext.Provider>
       );
-      expect(onActionMock2).toBeCalled();
+      expect(window.confirm).toBeCalled();
+      //const items = getByText("Вы уверены, что хотите выйти");
+      //expect(items).not.toBeNull();
+      //expect(onActionMock2).toBeCalled();
     });
   });
 });

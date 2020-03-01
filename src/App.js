@@ -6,9 +6,13 @@ import { ChoosePage } from "./pages/ChoosePage";
 import { AuthProvider } from "./providers/AuthContext";
 
 const App = () => {
-  const [showPage, setShowPage] = useState(2);
+  const [showPage, setShowPage] = useState(
+    //localStorage.getItem("accessToken") === null ? 4 : 2
+    4
+  );
 
   const showMapEvent = idOfButton => {
+    console.log(idOfButton);
     switch (idOfButton) {
       case "my-map":
         setShowPage(0);
@@ -19,8 +23,12 @@ const App = () => {
       case "logout":
         setShowPage(2);
         break;
+
       case "registration":
         setShowPage(3);
+        break;
+      case "login":
+        setShowPage(4);
         break;
       default:
         break;

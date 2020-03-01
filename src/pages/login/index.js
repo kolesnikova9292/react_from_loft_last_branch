@@ -1,10 +1,13 @@
 import React from "react";
 import { LoginForm } from "./LoginForm";
 
-export const Login = ({ showMapEvent }) => {
+export const Login = ({ showMapEvent, alreadyLoggedIn }) => {
   return (
     <>
-      <LoginForm showMapEvent={showMapEvent} />
+      <LoginForm
+        showMapEvent={showMapEvent}
+        alreadyLoggedIn={alreadyLoggedIn}
+      />
     </>
   );
 };

@@ -5,19 +5,30 @@ import "./Login.css";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 
-export const LoginForm = ({ showMapEvent }) => {
+export const LoginForm = ({ showMapEvent, alreadyLoggedIn }) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
   const loginFromContext = React.useContext(AuthContext);
-  loginFromContext.logout();
 
-  const handleLogIn = event => {
+  if (alreadyLoggedIn === true) {
+    if (window.confirm("Вы уверены, что хотите выйти?")) {
+      loginFromContext.logout();
+      showMapEvent("login");
+      localStorage.removeItem("accessToken");
+    }
+  }
+
+  const handleLogIn = async event => {
     event.preventDefault();
-    console.log(login);
-    console.log(password);
-    loginFromContext.loginContext();
-    showMapEvent("my-map");
+
+    const answer = await loginFromContext.loginContext(login, password);
+    console.log(answer);
+
+    if (answer !== undefined && answer.success === true) {
+      localStorage.setItem("accessToken", answer.token);
+      showMapEvent("my-map");
+    }
   };
 
   const goToRegistration = event => {

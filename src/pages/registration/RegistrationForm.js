@@ -13,14 +13,20 @@ export const RegistrationForm = ({ showMapEvent }) => {
 
   const loginFromContext = React.useContext(AuthContext);
 
-  const handleRegistration = event => {
+  const handleRegistration = async event => {
     event.preventDefault();
-    console.log(login);
-    console.log(password);
-    console.log(firstname);
-    console.log(lastname);
-    loginFromContext.loginContext();
-    showMapEvent("my-map");
+
+    const answer = await loginFromContext.registration(
+      login,
+      password,
+      firstname,
+      lastname
+    );
+    console.log(answer);
+    if (answer.success === true) {
+      localStorage.setItem("accessToken", answer.token);
+      showMapEvent("my-map");
+    }
   };
 
   const handleLoginChange = event => {

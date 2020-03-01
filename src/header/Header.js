@@ -58,8 +58,8 @@ export const Header = props => {
           ) : (
             <Button
               color="inherit"
-              onClick={() => props.showMapEvent("logout")}
-              id="logout"
+              onClick={() => props.showMapEvent("login")}
+              id="login"
             >
               Войти
             </Button>
