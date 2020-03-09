@@ -22,7 +22,7 @@ export const RegistrationForm = props => {
       firstname,
       lastname
     );
-    console.log(answer);
+
     if (answer.success === true) {
       localStorage.setItem("accessToken", answer.token);
       props.history.push("/map");

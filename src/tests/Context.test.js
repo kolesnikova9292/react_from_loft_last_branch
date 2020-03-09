@@ -24,7 +24,7 @@ describe("Context", () => {
       );
 
       const loginbutton = getByText("Войти");
-      //console.log(loginbutton);
+
       expect(loginbutton).not.toBeNull();
       fireEvent.submit(loginbutton);
 

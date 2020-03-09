@@ -53,47 +53,4 @@ export const Header = props => {
       </AppBar>
     </div>
   );
-  /*return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appbar}>
-        <Toolbar>
-          <Logo edge="start" color="inherit" aria-label="menu"></Logo>
-          <Typography variant="h6" className={classes.title}></Typography>
-          {loginFromContext.isAuthorized === true ? (
-            <>
-              <Button
-                color="inherit"
-                onClick={() => props.showMapEvent("my-map")}
-                id="my-map"
-              >
-                Карта
-              </Button>
-              <Button
-                color="inherit"
-                onClick={() => props.showMapEvent("personal-area")}
-                id="personal-area"
-              >
-                Профиль
-              </Button>
-              <Button
-                color="inherit"
-                onClick={() => props.showMapEvent("logout")}
-                id="logout"
-              >
-                Выйти
-              </Button>
-            </>
-          ) : (
-            <Button
-              color="inherit"
-              onClick={() => props.showMapEvent("login")}
-              id="login"
-            >
-              Войти
-            </Button>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
-  );*/
 };

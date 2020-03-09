@@ -13,7 +13,6 @@ const App = () => {
   );
 
   const showMapEvent = idOfButton => {
-    console.log(idOfButton);
     switch (idOfButton) {
       case "my-map":
         setShowPage(0);

@@ -12,22 +12,9 @@ export const LoginForm = props => {
 
   const loginFromContext = React.useContext(AuthContext);
 
-  /*if (loginFromContext.isAuthorized === true) {
-    if (window.confirm("Вы уверены, что хотите выйти?")) {
-      loginFromContext.logout();
-      //showMapEvent("login");
-
-      localStorage.removeItem("accessToken");
-      return <Redirect to="/login" />;
-    } else {
-      return <Redirect to="/map" />;
-    }
-  }*/
-
   if (localStorage.getItem("accessToken") !== null) {
     if (window.confirm("Вы уверены, что хотите выйти?")) {
       loginFromContext.logout();
-      //showMapEvent("login");
 
       localStorage.removeItem("accessToken");
       return <Redirect to="/login" />;
@@ -36,33 +23,13 @@ export const LoginForm = props => {
     }
   }
 
-  /*if (alreadyLoggedIn === true) {
-    if (window.confirm("Вы уверены, что хотите выйти?")) {
-      loginFromContext.logout();
-      showMapEvent("login");
-      localStorage.removeItem("accessToken");
-    }
-  }*/
-
-  /*if (alreadyLoggedIn === true) {
-    if (window.confirm("Вы уверены, что хотите выйти?")) {
-      loginFromContext.logout();
-      showMapEvent("login");
-      localStorage.removeItem("accessToken");
-    }
-  }*/
-
   const handleLogIn = async event => {
     event.preventDefault();
 
     const answer = await loginFromContext.loginContext(login, password);
-    console.log(answer);
 
     if (answer !== undefined && answer.success === true) {
       localStorage.setItem("accessToken", answer.token);
-      console.log(7878787);
-      //showMapEvent("my-map");
-      //return <Redirect to="/map" />;
       props.history.push("/map");
     }
   };
@@ -70,7 +37,6 @@ export const LoginForm = props => {
   const goToRegistration = event => {
     event.preventDefault();
     props.history.push("/registration");
-    //showMapEvent("registration");
   };
 
   const handleChangeLogin = event => {
