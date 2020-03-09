@@ -4,10 +4,49 @@ import { PersonalArea } from "./personal_area/PersonalArea";
 import { Login } from "./login";
 import { Registration } from "./registration";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { AuthContext } from "../providers/AuthContext";
 import { PrivateRoute } from "./PrivateRoute";
+import { connect } from "react-redux";
 
-export const ChoosePage = () => {
+const ChoosePage = props => {
+  const { isAuthorized } = props;
+  return (
+    <>
+      <Switch>
+        <PrivateRoute
+          path="/map"
+          component={Map}
+          exact
+          isAuthorized={isAuthorized}
+          loginPath="/login"
+          exact
+        />
+        <PrivateRoute
+          path="/personal"
+          component={PersonalArea}
+          exact
+          isAuthorized={isAuthorized}
+          loginPath="/login"
+          exact
+        />
+        <Route path="/registration" component={Registration} exact />
+        <Route path="/login" component={Login} exact />
+        <Route path="/logout" component={Login} exact />
+        <Route path="/" component={isAuthorized == true ? Map : Login} exact />
+        <Redirect to="/" />
+      </Switch>
+    </>
+  );
+};
+
+const mapStateToProps = state => {
+  return {
+    isAuthorized: state.isAuthorized,
+  };
+};
+
+export default connect(mapStateToProps)(ChoosePage);
+
+/*const ChoosePage = () => {
   const loginFromContext = React.useContext(AuthContext);
   return (
     <>
@@ -41,3 +80,5 @@ export const ChoosePage = () => {
     </>
   );
 };
+
+export default ChoosePage;*/

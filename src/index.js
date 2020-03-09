@@ -5,10 +5,14 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { theme } from "loft-taxi-mui-theme"; // Импортируем саму тему
 import { MuiThemeProvider } from "@material-ui/core/styles";
+import store from "./providers/redux/store";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </MuiThemeProvider>,
   document.getElementById("root")
 );

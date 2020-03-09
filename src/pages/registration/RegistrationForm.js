@@ -1,9 +1,9 @@
-import React, { useState, Component } from "react";
+import React, { useState } from "react";
 import "./Registration.css";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { AuthContext } from "../../providers/AuthContext";
+import { connect } from "react-redux";
 
 export const RegistrationForm = props => {
   const [login, setLogin] = useState("");
@@ -11,12 +11,10 @@ export const RegistrationForm = props => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
 
-  const loginFromContext = React.useContext(AuthContext);
-
   const handleRegistration = async event => {
     event.preventDefault();
 
-    const answer = await loginFromContext.registration(
+    /*const answer = await loginFromContext.registration(
       login,
       password,
       firstname,
@@ -26,8 +24,7 @@ export const RegistrationForm = props => {
     if (answer.success === true) {
       localStorage.setItem("accessToken", answer.token);
       props.history.push("/map");
-      //showMapEvent("my-map");
-    }
+    }*/
   };
 
   const handleLoginChange = event => {

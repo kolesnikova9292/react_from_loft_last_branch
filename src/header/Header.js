@@ -5,8 +5,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import { Logo } from "loft-taxi-mui-theme";
-import { AuthContext } from "../providers/AuthContext";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,16 +23,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const Header = props => {
-  const loginFromContext = React.useContext(AuthContext);
+const Header = props => {
   const classes = useStyles();
+  const { isAuthorized } = props;
+  console.log(isAuthorized);
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
         <Toolbar>
           <Logo edge="start" color="inherit" aria-label="menu"></Logo>
           <Typography variant="h6" className={classes.title}></Typography>
-          {loginFromContext.isAuthorized === true ? (
+          {isAuthorized === true ? (
             <>
               <Button component={Link} to="/map" id="my-map">
                 Карта
@@ -54,3 +55,11 @@ export const Header = props => {
     </div>
   );
 };
+
+const mapStateToProps = state => {
+  return {
+    isAuthorized: state.isAuthorized,
+  };
+};
+
+export default connect(mapStateToProps)(Header);
