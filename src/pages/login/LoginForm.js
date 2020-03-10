@@ -12,8 +12,6 @@ const LoginForm = props => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  console.log(props.token);
-
   /*if (token !== null) {
     if (window.confirm("Вы уверены, что хотите выйти?")) {
       //loginFromContext.logout();
@@ -28,18 +26,9 @@ const LoginForm = props => {
   const handleLogIn = async event => {
     event.preventDefault();
     const result = await getAuthRequest({ login, password });
-    //result.then(res => console.log(res));
-    console.log(props);
     const { token } = props;
     localStorage.setItem("accessToken", token);
     props.history.push("/map");
-    console.log(7777777);
-    //const answer = await loginFromContext.loginContext(login, password);
-
-    /*if (answer !== undefined && answer.success === true) {
-      localStorage.setItem("accessToken", answer.token);
-      props.history.push("/map");
-    }*/
   };
 
   const goToRegistration = event => {

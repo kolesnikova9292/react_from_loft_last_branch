@@ -14,6 +14,8 @@ const App = () => {
     4
   );
 
+  localStorage.removeItem("accessToken");
+
   const showMapEvent = idOfButton => {
     switch (idOfButton) {
       case "my-map":
