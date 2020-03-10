@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const loftTaxiMiddleware = store => next => async action => {
   if (action.type === getAuthRequest.toString()) {
+    console.log(2);
     const response = await axios
       .post(
         "http://loft-taxi.glitch.me/auth",
@@ -13,5 +14,9 @@ export const loftTaxiMiddleware = store => next => async action => {
       .catch(error => store.dispatch(getAuthFailure(error)));
   }
 
-  return next(action);
+  console.log(store.getState());
+  const result = next(action);
+  console.log(store.getState());
+
+  return result;
 };

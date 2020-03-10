@@ -12,11 +12,14 @@ export const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case getAuthRequest.toString():
+      console.log(4);
+      console.log(state);
       return {
         ...state,
       };
 
     case getAuthSucces.toString():
+      console.log(3);
       return {
         ...state,
         isAuthorized: true,

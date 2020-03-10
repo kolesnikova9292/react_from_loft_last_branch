@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 
 const ChoosePage = props => {
   const { isAuthorized } = props;
+  console.log(isAuthorized);
   return (
     <>
       <Switch>

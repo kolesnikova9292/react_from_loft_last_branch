@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import "./Login.css";
 import Card from "@material-ui/core/Card";
@@ -23,11 +23,26 @@ const LoginForm = props => {
     }
   }*/
 
+  console.log(props);
+
+  useEffect(() => {
+    // Обновляем заголовок документа с помощью API браузера
+    //document.title = `Вы нажали ${count} раз`;
+    console.log(props);
+    localStorage.setItem("accessToken", token);
+    //mapStateToProps(props);
+    //console.log(state);
+  });
+
   const handleLogIn = async event => {
     event.preventDefault();
+    console.log(1);
     const result = await getAuthRequest({ login, password });
-    const { token } = props;
-    localStorage.setItem("accessToken", token);
+
+    console.log(5);
+    console.log(token);
+    //const { token } = props;
+
     props.history.push("/map");
   };
 
@@ -79,6 +94,7 @@ const LoginForm = props => {
 const mapStateToProps = state => {
   return {
     token: state.token,
+    isAuthorized: state.isAuthorized,
   };
 };
 const mapDispatchToProps = { getAuthRequest };
