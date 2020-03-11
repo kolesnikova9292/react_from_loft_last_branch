@@ -12,6 +12,10 @@ const LoginForm = props => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
+  /*if (token != null) {
+    localStorage.setItem("accessToken", token);
+  }*/
+
   /*if (token !== null) {
     if (window.confirm("Вы уверены, что хотите выйти?")) {
       //loginFromContext.logout();
@@ -24,14 +28,15 @@ const LoginForm = props => {
   }*/
 
   console.log(props);
+  console.log(token);
 
   useEffect(() => {
     // Обновляем заголовок документа с помощью API браузера
     //document.title = `Вы нажали ${count} раз`;
     console.log(props);
-    if (props.goAway !== true) {
-      localStorage.setItem("accessToken", token);
-    }
+    //if (props.goAway !== true) {
+    localStorage.setItem("accessToken", token);
+    //}
 
     //mapStateToProps(props);
     //console.log(state);

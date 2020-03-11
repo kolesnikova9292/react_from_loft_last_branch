@@ -17,6 +17,7 @@ export const loftTaxiMiddleware = store => next => async action => {
   console.log(store.getState());
   const result = next(action);
   console.log(store.getState());
+  localStorage.setItem("accessToken", store.getState().token);
 
   return result;
 };
