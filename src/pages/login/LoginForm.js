@@ -5,10 +5,10 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { getAuthRequest } from "../../providers/redux/actions";
+import { getAuthRequest, logoutUser } from "../../providers/redux/actions";
 
 const LoginForm = props => {
-  const { token, getAuthRequest } = props;
+  const { token, getAuthRequest, logoutUser } = props;
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,10 +29,25 @@ const LoginForm = props => {
     // Обновляем заголовок документа с помощью API браузера
     //document.title = `Вы нажали ${count} раз`;
     console.log(props);
-    localStorage.setItem("accessToken", token);
+    if (props.goAway !== true) {
+      localStorage.setItem("accessToken", token);
+    }
+
     //mapStateToProps(props);
     //console.log(state);
   });
+
+  if (props.goAway === true) {
+    if (window.confirm("Вы уверены, что хотите выйти?")) {
+      //loginFromContext.logout();
+      console.log("localStorage.removeItem(accessToken);");
+      logoutUser();
+      localStorage.removeItem("accessToken");
+      return <Redirect to="/login" />;
+    } else {
+      return <Redirect to="/map" />;
+    }
+  }
 
   const handleLogIn = async event => {
     event.preventDefault();
@@ -97,7 +112,7 @@ const mapStateToProps = state => {
     isAuthorized: state.isAuthorized,
   };
 };
-const mapDispatchToProps = { getAuthRequest };
+const mapDispatchToProps = { getAuthRequest, logoutUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
 

@@ -1,4 +1,9 @@
-import { getAuthRequest, getAuthSucces, getAuthFailure } from "./actions";
+import {
+  getAuthRequest,
+  getAuthSucces,
+  getAuthFailure,
+  logoutUser,
+} from "./actions";
 
 export const initialState = {
   token: null,
@@ -32,6 +37,13 @@ export default function(state = initialState, action) {
         isAuthorized: false,
         token: null,
         error: action.payload.error,
+      };
+
+    case logoutUser.toString():
+      return {
+        ...state,
+        isAuthorized: false,
+        token: null,
       };
 
     default:

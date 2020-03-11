@@ -31,7 +31,11 @@ const ChoosePage = props => {
         />
         <Route path="/registration" component={Registration} exact />
         <Route path="/login" component={Login} exact />
-        <Route path="/logout" component={Login} exact />
+        <Route
+          path="/logout"
+          render={props => <Login {...props} goAway={true} />}
+          exact
+        />
         <Route path="/" component={isAuthorized == true ? Map : Login} exact />
         <Redirect to="/" />
       </Switch>
