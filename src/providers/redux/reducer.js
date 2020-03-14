@@ -6,25 +6,22 @@ import {
 } from "./actions";
 
 export const initialState = {
-  token: null,
-  //localStorage.getItem("token") == undefined
-  // ? null
-  // : localStorage.getItem("token"),
-  isAuthorized: false,
+  token:
+    localStorage.getItem("accessToken") == undefined
+      ? null
+      : localStorage.getItem("accessToken"),
+  isAuthorized: localStorage.getItem("accessToken") == undefined ? false : true,
   error: null,
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case getAuthRequest.toString():
-      console.log(4);
-      console.log(state);
       return {
         ...state,
       };
 
     case getAuthSucces.toString():
-      console.log(3);
       return {
         ...state,
         isAuthorized: true,
@@ -32,6 +29,7 @@ export default function(state = initialState, action) {
       };
 
     case getAuthFailure.toString():
+      console.log(88888888888888);
       return {
         ...state,
         isAuthorized: false,

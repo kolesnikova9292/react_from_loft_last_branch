@@ -8,44 +8,12 @@ import { connect } from "react-redux";
 import { getAuthRequest, logoutUser } from "../../providers/redux/actions";
 
 const LoginForm = props => {
-  const { token, getAuthRequest, logoutUser } = props;
+  const { getAuthRequest, logoutUser } = props;
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  /*if (token != null) {
-    localStorage.setItem("accessToken", token);
-  }*/
-
-  /*if (token !== null) {
-    if (window.confirm("Вы уверены, что хотите выйти?")) {
-      //loginFromContext.logout();
-
-      localStorage.removeItem("accessToken");
-      return <Redirect to="/login" />;
-    } else {
-      return <Redirect to="/map" />;
-    }
-  }*/
-
-  console.log(props);
-  console.log(token);
-
-  useEffect(() => {
-    // Обновляем заголовок документа с помощью API браузера
-    //document.title = `Вы нажали ${count} раз`;
-    console.log(props);
-    //if (props.goAway !== true) {
-    localStorage.setItem("accessToken", token);
-    //}
-
-    //mapStateToProps(props);
-    //console.log(state);
-  });
-
   if (props.goAway === true) {
     if (window.confirm("Вы уверены, что хотите выйти?")) {
-      //loginFromContext.logout();
-      console.log("localStorage.removeItem(accessToken);");
       logoutUser();
       localStorage.removeItem("accessToken");
       return <Redirect to="/login" />;
@@ -56,13 +24,7 @@ const LoginForm = props => {
 
   const handleLogIn = async event => {
     event.preventDefault();
-    console.log(1);
-    const result = await getAuthRequest({ login, password });
-
-    console.log(5);
-    console.log(token);
-    //const { token } = props;
-
+    await getAuthRequest({ login, password });
     props.history.push("/map");
   };
 
@@ -111,15 +73,9 @@ const LoginForm = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    token: state.token,
-    isAuthorized: state.isAuthorized,
-  };
-};
 const mapDispatchToProps = { getAuthRequest, logoutUser };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default connect(null, mapDispatchToProps)(LoginForm);
 
 //const mapStateToProps = state => state;
 //const mapDispatchToProps = { getAuthRequest };
