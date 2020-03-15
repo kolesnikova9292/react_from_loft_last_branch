@@ -5,10 +5,13 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { getAuthRequest, logoutUser } from "../../providers/redux/actions";
+import {
+  fetchAuthRequest,
+  logoutUser,
+} from "../../providers/redux/modules/auth";
 
 const LoginForm = props => {
-  const { getAuthRequest, logoutUser } = props;
+  const { fetchAuthRequest, logoutUser } = props;
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,7 +27,7 @@ const LoginForm = props => {
 
   const handleLogIn = async event => {
     event.preventDefault();
-    await getAuthRequest({ login, password });
+    await fetchAuthRequest({ login, password });
     props.history.push("/map");
   };
 
@@ -73,7 +76,7 @@ const LoginForm = props => {
   );
 };
 
-const mapDispatchToProps = { getAuthRequest, logoutUser };
+const mapDispatchToProps = { fetchAuthRequest, logoutUser };
 
 export default connect(null, mapDispatchToProps)(LoginForm);
 

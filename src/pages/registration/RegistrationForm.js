@@ -4,10 +4,10 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
-import { getRegistrationRequest } from "../../providers/redux/actions";
+import { fetchRegistrationRequest } from "../../providers/redux/modules/auth";
 
 const RegistrationForm = props => {
-  const { getRegistrationRequest } = props;
+  const { fetchRegistrationRequest } = props;
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -15,7 +15,7 @@ const RegistrationForm = props => {
 
   const handleRegistration = async event => {
     event.preventDefault();
-    await getRegistrationRequest({
+    await fetchRegistrationRequest({
       email: login,
       password: password,
       name: firstname,
@@ -92,6 +92,6 @@ const RegistrationForm = props => {
   );
 };
 
-const mapDispatchToProps = { getRegistrationRequest };
+const mapDispatchToProps = { fetchRegistrationRequest };
 
 export default connect(null, mapDispatchToProps)(RegistrationForm);

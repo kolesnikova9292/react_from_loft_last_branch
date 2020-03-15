@@ -7,6 +7,7 @@ import {
   getRegistrationFailure,
   getRegistrationSucces,
 } from "../actions";
+import { createSelector } from "reselect";
 
 const token = handleActions(
   {
@@ -47,6 +48,10 @@ export default combineReducers({
 export const getToken = state => state.auth.token;
 export const getAuthFlag = state => state.auth.isAuthorized;
 export const getError = state => state.auth.error;
+
+/*export const getToken = state => state.auth.token;
+export const getAuthFlag = state => state.auth.isAuthorized;
+export const getError = state => state.auth.error;*/
 
 /*export default function(state = initialState, action) {
   switch (action.type) {

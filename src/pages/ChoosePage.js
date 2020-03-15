@@ -6,7 +6,7 @@ import { Registration } from "./registration";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { PrivateRoute } from "./PrivateRoute";
 import { connect } from "react-redux";
-import { getAuthFlag } from "../providers/redux/reducers/authReducer";
+import { getAuthFlag } from "../providers/redux/modules/auth";
 
 const ChoosePage = props => {
   const { isAuthorized } = props;

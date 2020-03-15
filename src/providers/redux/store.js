@@ -1,7 +1,11 @@
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
-import authReducer from "./reducers/authReducer";
-import { loftTaxiMiddleware } from "./middlewares";
+//import authReducer from "./modules/auth";
+import { loftTaxiMiddleware } from "./modules/auth";
 import thunk from "redux-thunk";
+import rootReducer from "./modules";
+
+//console.log(loftTaxiMiddleware);
+console.log(rootReducer);
 
 export const initialState = {
   auth: {
@@ -16,9 +20,7 @@ export const initialState = {
 };
 
 const store = createStore(
-  combineReducers({
-    auth: authReducer,
-  }),
+  rootReducer,
   initialState,
   compose(applyMiddleware(thunk), applyMiddleware(loftTaxiMiddleware))
   /*compose(
