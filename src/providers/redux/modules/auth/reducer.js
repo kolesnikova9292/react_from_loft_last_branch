@@ -43,5 +43,3 @@ export default combineReducers({
   isAuthorized,
   error,
 });
-
-console.log(combineReducers);

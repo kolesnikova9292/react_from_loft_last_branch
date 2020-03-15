@@ -4,9 +4,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import Header from "./header/Header";
 import ChoosePage from "./pages/ChoosePage";
-import { AuthProvider } from "./providers/AuthContext";
-import { connect } from "react-redux";
-import { getAuthRequest } from "./providers/redux/actions";
 
 const App = () => {
   const [showPage, setShowPage] = useState(

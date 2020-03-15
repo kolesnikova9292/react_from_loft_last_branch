@@ -19,7 +19,6 @@ const ChoosePage = props => {
           exact
           isAuthorized={isAuthorized}
           loginPath="/login"
-          exact
         />
         <PrivateRoute
           path="/personal"
@@ -27,7 +26,6 @@ const ChoosePage = props => {
           exact
           isAuthorized={isAuthorized}
           loginPath="/login"
-          exact
         />
         <Route path="/registration" component={Registration} exact />
         <Route path="/login" component={Login} exact />

@@ -9,9 +9,7 @@ import {
 import axios from "axios";
 
 export const loftTaxiMiddleware = store => next => async action => {
-  console.log(111111111);
   if (action.type === fetchAuthRequest.toString()) {
-    console.log(111111111);
     await axios
       .post(
         "http://loft-taxi.glitch.me/auth",
@@ -19,7 +17,7 @@ export const loftTaxiMiddleware = store => next => async action => {
         { headers: { "Content-Type": "application/json" } }
       )
       .then(data => {
-        if (data.data.success == true) store.dispatch(fetchAuthSucces(data));
+        if (data.data.success === true) store.dispatch(fetchAuthSucces(data));
         else store.dispatch(fetchAuthFailure(data.data.error));
       })
       .catch(error => store.dispatch(fetchAuthFailure(error)));
@@ -40,7 +38,7 @@ export const loftTaxiMiddleware = store => next => async action => {
         }
       )
       .then(res => {
-        if (res.data.success == true) {
+        if (res.data.success === true) {
           store.dispatch(fetchRegistrationSucces(res));
         } else {
           store.dispatch(fetchRegistrationFailure(res.data.error));
