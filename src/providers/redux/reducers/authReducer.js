@@ -44,6 +44,10 @@ export default combineReducers({
   error,
 });
 
+export const getToken = state => state.auth.token;
+export const getAuthFlag = state => state.auth.isAuthorized;
+export const getError = state => state.auth.error;
+
 /*export default function(state = initialState, action) {
   switch (action.type) {
     case getAuthRequest.toString():

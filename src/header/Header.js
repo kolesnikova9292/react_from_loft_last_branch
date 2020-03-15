@@ -7,6 +7,7 @@ import AppBar from "@material-ui/core/AppBar";
 import { Logo } from "loft-taxi-mui-theme";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { getAuthFlag } from "../providers/redux/reducers/authReducer";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,7 +58,7 @@ const Header = props => {
 
 const mapStateToProps = state => {
   return {
-    isAuthorized: state.auth.isAuthorized,
+    isAuthorized: getAuthFlag(state),
   };
 };
 

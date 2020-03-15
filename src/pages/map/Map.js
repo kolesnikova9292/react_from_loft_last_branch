@@ -1,6 +1,7 @@
 import React from "react";
 import { MapField } from "./MapField";
 import { connect } from "react-redux";
+import { getToken } from "../../providers/redux/reducers/authReducer";
 
 const Map = props => {
   const { token } = props;
@@ -14,7 +15,7 @@ const Map = props => {
 
 const mapStateToProps = state => {
   return {
-    token: state.auth.token,
+    token: getToken(state),
   };
 };
 
