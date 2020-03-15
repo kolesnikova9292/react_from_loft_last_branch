@@ -1,15 +1,50 @@
-import { initialState } from "../store";
+import { handleActions } from "redux-actions";
+import { combineReducers } from "redux";
 import {
-  getAuthRequest,
   getAuthSucces,
   getAuthFailure,
   logoutUser,
-  getRegistrationRequest,
   getRegistrationFailure,
   getRegistrationSucces,
 } from "../actions";
 
-export default function(state = initialState, action) {
+const token = handleActions(
+  {
+    [getAuthSucces]: (_state, action) => action.payload.data.token,
+    [getAuthFailure]: () => null,
+    [getRegistrationSucces]: (_state, action) => action.payload.data.token,
+    [getRegistrationFailure]: () => null,
+    [logoutUser]: () => null,
+  },
+  null
+);
+
+const isAuthorized = handleActions(
+  {
+    [getAuthSucces]: () => true,
+    [getRegistrationSucces]: () => true,
+    [getAuthFailure]: () => false,
+    [getRegistrationFailure]: () => false,
+    [logoutUser]: () => false,
+  },
+  false
+);
+
+const error = handleActions(
+  {
+    [getAuthFailure]: (_state, action) => action.payload.error,
+    [getRegistrationFailure]: (_state, action) => action.payload.error,
+  },
+  null
+);
+
+export default combineReducers({
+  token,
+  isAuthorized,
+  error,
+});
+
+/*export default function(state = initialState, action) {
   switch (action.type) {
     case getAuthRequest.toString():
     case getRegistrationRequest.toString():
@@ -44,4 +79,4 @@ export default function(state = initialState, action) {
     default:
       return state;
   }
-}
+}*/
