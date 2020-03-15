@@ -1,27 +1,24 @@
+import { initialState } from "../store";
 import {
   getAuthRequest,
   getAuthSucces,
   getAuthFailure,
   logoutUser,
-} from "./actions";
-
-export const initialState = {
-  token:
-    localStorage.getItem("accessToken") == undefined
-      ? null
-      : localStorage.getItem("accessToken"),
-  isAuthorized: localStorage.getItem("accessToken") == undefined ? false : true,
-  error: null,
-};
+  getRegistrationRequest,
+  getRegistrationFailure,
+  getRegistrationSucces,
+} from "../actions";
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case getAuthRequest.toString():
+    case getRegistrationRequest.toString():
       return {
         ...state,
       };
 
     case getAuthSucces.toString():
+    case getRegistrationSucces.toString():
       return {
         ...state,
         isAuthorized: true,
@@ -29,7 +26,7 @@ export default function(state = initialState, action) {
       };
 
     case getAuthFailure.toString():
-      console.log(88888888888888);
+    case getRegistrationFailure.toString():
       return {
         ...state,
         isAuthorized: false,

@@ -57,7 +57,7 @@ const Header = props => {
 
 const mapStateToProps = state => {
   return {
-    isAuthorized: state.isAuthorized,
+    isAuthorized: state.auth.isAuthorized,
   };
 };
 

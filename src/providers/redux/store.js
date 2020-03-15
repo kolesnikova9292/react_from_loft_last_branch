@@ -1,10 +1,29 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import reducer, { initialState } from "./reducer";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import authReducer from "./reducers/authReducer";
 import { loftTaxiMiddleware } from "./middlewares";
 import thunk from "redux-thunk";
 
+export const initialState = {
+  auth: {
+    token:
+      localStorage.getItem("accessToken") == undefined
+        ? null
+        : localStorage.getItem("accessToken"),
+    isAuthorized:
+      localStorage.getItem("accessToken") == undefined ? false : true,
+    error: null,
+  },
+};
+
+/*const rootReducer = combineReducers({
+  authReducer,
+  registrationReducer,
+});*/
+
 const store = createStore(
-  reducer,
+  combineReducers({
+    auth: authReducer,
+  }),
   initialState,
   compose(applyMiddleware(thunk), applyMiddleware(loftTaxiMiddleware))
   /*compose(
