@@ -15,11 +15,6 @@ export const initialState = {
   },
 };
 
-/*const rootReducer = combineReducers({
-  authReducer,
-  registrationReducer,
-});*/
-
 const store = createStore(
   combineReducers({
     auth: authReducer,

@@ -15,7 +15,6 @@ const RegistrationForm = props => {
 
   const handleRegistration = async event => {
     event.preventDefault();
-    console.log(login, password, firstname, lastname);
     await getRegistrationRequest({
       email: login,
       password: password,
