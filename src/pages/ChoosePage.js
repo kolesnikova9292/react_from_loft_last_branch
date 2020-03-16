@@ -1,6 +1,6 @@
 import React from "react";
 import Map from "./map/Map";
-import { PersonalArea } from "./personal_area/PersonalArea";
+import { PersonalArea } from "./personal_area";
 import { Login } from "./login";
 import { Registration } from "./registration";
 import { Route, Switch, Redirect } from "react-router-dom";

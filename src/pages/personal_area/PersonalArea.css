@@ -1,0 +1,59 @@
+.divForFormPersonal{
+    
+    display: flex;
+    justify-content: space-around;
+    
+  
+}
+
+.myForm{
+    text-align:center;
+}
+
+.cardForFormPersonal{
+    padding: 20px!important;
+    text-align: center;
+    width: 100%!important;
+}
+
+.divForFormPersonalChild{
+    margin: 20px;
+    width: 50%;
+    text-align: center;
+}
+
+.textField{
+    margin: 25px!important;
+    width: 300px
+}
+
+.commonDiv{
+    margin: 0 auto;
+    width:800px!important;
+    margin-top: 5%;
+
+}
+
+.myButton{
+    margin: 0 auto;
+    font-weight: bold!important;
+    padding-top: 10%!important;
+}
+
+@media screen and (max-width: 700px) {
+    .divForFormPersonal{
+        display: block
+    }
+
+    .commonDiv{
+
+        width:90%!important;
+    
+    }
+
+    .divForFormPersonalChild{
+        width: 90%;
+    }
+
+
+  }
