@@ -6,11 +6,11 @@ import rootReducer from "./modules";
 export const initialState = {
   auth: {
     token:
-      localStorage.getItem("accessToken") === undefined
+      localStorage.getItem("accessToken") == undefined
         ? null
         : localStorage.getItem("accessToken"),
     isAuthorized:
-      localStorage.getItem("accessToken") === undefined ? false : true,
+      localStorage.getItem("accessToken") == undefined ? false : true,
     error: null,
   },
 };
