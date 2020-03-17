@@ -40,6 +40,17 @@
     padding-top: 10%!important;
 }
 
+.classForMask{
+    margin: 25px!important;
+    text-align: left;
+    margin-left: 30px!important;
+
+}
+
+.inpotForMask{
+    width: 100%;
+}
+
 @media screen and (max-width: 700px) {
     .divForFormPersonal{
         display: block
