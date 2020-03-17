@@ -3,27 +3,40 @@ import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
-import MaskedInput from "react-text-mask";
 import "./PersonalArea.css";
-import FormControl from "@material-ui/core/FormControl";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import PropTypes from "prop-types";
+import {
+  fetchBankCardInformation,
+  fetchRegistrateMyBankCard,
+} from "../../providers/redux/modules/bankCard";
 
-const PersonalAreaForm = () => {
+const PersonalAreaForm = props => {
+  const { fetchRegistrateMyBankCard } = props;
   const { cardNumber, setCardNumber } = useState("");
   const { validity, setValidity } = useState("");
   const { owner, setOwner } = useState("");
   const { cvc, setCVC } = useState("");
-  const handleCardParams = async event => {};
 
-  const handleChangeCardNumber = event => {};
+  const handleCardParams = async event => {
+    event.preventDefault();
+    await fetchRegistrateMyBankCard({ cardNumber, validity, owner, cvc });
+    props.history.push("/map");
+  };
 
-  const handleChangeCardValidity = event => {};
+  const handleChangeCardNumber = event => {
+    setCardNumber(event.target.value);
+  };
 
-  const handleChangeCardOwner = event => {};
+  const handleChangeCardValidity = event => {
+    setValidity(event.target.value);
+  };
 
-  const handleChangeCardCVC = event => {};
+  const handleChangeCardOwner = event => {
+    setOwner(event.target.value);
+  };
+
+  const handleChangeCardCVC = event => {
+    setCVC(event.target.value);
+  };
 
   return (
     <div className="commonDiv">
@@ -84,57 +97,9 @@ const PersonalAreaForm = () => {
       </form>
     </div>
   );
-
-  /*return (
-    <div className="divForFormPersonal">
-      <div className="divForFormPersonalChild">
-        <Card>
-          <TextField
-            label="Номер карты"
-            color="secondary"
-            type="text"
-            value={cardNumber}
-            name="cardNumber"
-            onChange={handleChangeCardNumber}
-          />
-          <TextField
-            label="Срок действия"
-            color="secondary"
-            type="text"
-            name="validity"
-            value={validity}
-            onChange={handleChangeCardValidity}
-          />
-        </Card>
-      </div>
-      <div className="divForFormPersonalChild">
-        <Card>
-          <TextField
-            label="Имя владельца"
-            color="secondary"
-            type="text"
-            value={owner}
-            name="owner"
-            onChange={handleChangeCardOwner}
-          />
-          <TextField
-            label="CVC"
-            color="secondary"
-            type="text"
-            name="cvc"
-            value={cvc}
-            onChange={handleChangeCardCVC}
-          />
-        </Card>
-      </div>
-      <Button type="submit" value="Войти">
-        Войти
-      </Button>
-    </div>
-  );*/
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { fetchRegistrateMyBankCard };
 
 export default connect(null, mapDispatchToProps)(PersonalAreaForm);
 

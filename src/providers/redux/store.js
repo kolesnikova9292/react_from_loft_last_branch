@@ -13,6 +13,12 @@ export const initialState = {
       localStorage.getItem("accessToken") == undefined ? false : true,
     error: null,
   },
+  bank_card: {
+    number: null,
+    validity: null,
+    owner: null,
+    cvc: null,
+  },
 };
 
 const store = createStore(
