@@ -10,22 +10,6 @@ import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import PropTypes from "prop-types";
 
-function TextMaskCustom(props) {
-  const { inputRef, ...other } = props;
-
-  return (
-    <MaskedInput
-      {...other}
-      ref={ref => {
-        inputRef(ref ? ref.inputElement : null);
-      }}
-      mask={[/[0-1]/, /\d/, "/", /\d/, /\d/]}
-      placeholderChar={"\u2000"}
-      showMask
-    />
-  );
-}
-
 const PersonalAreaForm = () => {
   const { cardNumber, setCardNumber } = useState("");
   const { validity, setValidity } = useState("");
@@ -40,18 +24,6 @@ const PersonalAreaForm = () => {
   const handleChangeCardOwner = event => {};
 
   const handleChangeCardCVC = event => {};
-
-  const [values, setValues] = useState({
-    textmask: "  /  ",
-    numberformat: "1320",
-  });
-
-  const handleChange = name => event => {
-    setValues({
-      ...values,
-      [name]: event.target.value,
-    });
-  };
 
   return (
     <div className="commonDiv">
@@ -69,22 +41,16 @@ const PersonalAreaForm = () => {
                 className="textField"
                 required
               />
-              <div className="classForMask">
-                <FormControl required>
-                  <InputLabel htmlFor="formatted-text-mask-input">
-                    Срок действия
-                  </InputLabel>
-                  <Input
-                    required
-                    name="validity"
-                    className="inpotForMask"
-                    value={validity}
-                    onChange={handleChangeCardValidity}
-                    id="formatted-text-mask-input"
-                    inputComponent={TextMaskCustom}
-                  />
-                </FormControl>
-              </div>
+              <TextField
+                label="Срок действия"
+                color="secondary"
+                type="text"
+                value={validity}
+                name="validity"
+                onChange={handleChangeCardValidity}
+                className="textField"
+                required
+              />
             </Card>
           </div>
           <div className="divForFormPersonalChild">
