@@ -3,18 +3,13 @@ import { combineReducers } from "redux";
 import {
   fetchBankCardInformationFail,
   fetchBankCardInformationSuccess,
-  fetchRegistrateMyBankCardFail,
-  fetchRegistrateMyBankCardSuccess,
 } from "./actions";
 
 const number = handleActions(
   {
     [fetchBankCardInformationSuccess]: (_state, action) =>
-      action.payload.data.number,
+      action.payload.data.cardNumber,
     [fetchBankCardInformationFail]: () => null,
-    [fetchRegistrateMyBankCardSuccess]: (_state, action) =>
-      action.payload.data.number,
-    [fetchRegistrateMyBankCardFail]: () => null,
   },
   null
 );
@@ -22,11 +17,8 @@ const number = handleActions(
 const validity = handleActions(
   {
     [fetchBankCardInformationSuccess]: (_state, action) =>
-      action.payload.data.validity,
+      action.payload.data.expiryDate,
     [fetchBankCardInformationFail]: () => null,
-    [fetchRegistrateMyBankCardSuccess]: (_state, action) =>
-      action.payload.data.validity,
-    [fetchRegistrateMyBankCardFail]: () => null,
   },
   null
 );
@@ -34,11 +26,8 @@ const validity = handleActions(
 const owner = handleActions(
   {
     [fetchBankCardInformationSuccess]: (_state, action) =>
-      action.payload.data.owner,
+      action.payload.data.cardName,
     [fetchBankCardInformationFail]: () => null,
-    [fetchRegistrateMyBankCardSuccess]: (_state, action) =>
-      action.payload.data.owner,
-    [fetchRegistrateMyBankCardFail]: () => null,
   },
   null
 );
@@ -48,9 +37,6 @@ const cvc = handleActions(
     [fetchBankCardInformationSuccess]: (_state, action) =>
       action.payload.data.cvc,
     [fetchBankCardInformationFail]: () => null,
-    [fetchRegistrateMyBankCardSuccess]: (_state, action) =>
-      action.payload.data.cvc,
-    [fetchRegistrateMyBankCardFail]: () => null,
   },
   null
 );

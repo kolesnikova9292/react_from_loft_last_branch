@@ -1,4 +1,4 @@
-export const getCardNumber = state => state.bank_card.number;
-export const getCardValidity = state => state.bank_card.validity;
-export const getCardOwner = state => state.bank_card.owner;
-export const getCardCVC = state => state.bank_card.cvc;
+export const getCardNumber = state => state.bankCard.number;
+export const getCardValidity = state => state.bankCard.validity;
+export const getCardOwner = state => state.bankCard.owner;
+export const getCardCVC = state => state.bankCard.cvc;

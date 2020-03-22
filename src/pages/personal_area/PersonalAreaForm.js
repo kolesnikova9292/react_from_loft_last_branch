@@ -9,7 +9,12 @@ import {
   fetchRegistrateMyBankCard,
 } from "../../providers/redux/modules/bankCard";
 import { getToken } from "../../providers/redux/modules/auth";
-import { getCardNumber } from "../../providers/redux/modules/bankCard";
+import {
+  getCardNumber,
+  getCardValidity,
+  getCardOwner,
+  getCardCVC,
+} from "../../providers/redux/modules/bankCard";
 
 const PersonalAreaForm = props => {
   const {
@@ -17,33 +22,35 @@ const PersonalAreaForm = props => {
     token,
     fetchBankCardInformation,
     cardNumber,
+    validity,
+    owner,
+    cvc,
   } = props;
   const [cardNumberInputForm, setCardNumber] = useState("");
-  const [validity, setValidity] = useState("");
-  const [owner, setOwner] = useState("");
-  const [cvc, setCVC] = useState("");
+  const [validityInputForm, setValidity] = useState("");
+  const [ownerInputForm, setOwner] = useState("");
+  const [cvcInputForm, setCVC] = useState("");
 
   async function fetchBankCardData() {
     await fetchBankCardInformation(token);
-    console.log(cardNumber);
-    /*const res = await fetch("https://swapi.co/api/planets/4/");
-    res
-      .json()
-      .then(res => setPlanets(res))
-      .catch(err => setErrors(err));*/
   }
 
   useEffect(() => {
-    fetchBankCardData();
-  });
+    fetchBankCardData().then(() => {
+      if (cardNumber != null) setCardNumber(cardNumber);
+      if (validity != null) setValidity(validity);
+      if (owner != null) setOwner(owner);
+      if (cvc != null) setCVC(cvc);
+    });
+  }, [cardNumber, validity, owner, cvc]);
 
   const handleCardParams = async event => {
     event.preventDefault();
     await fetchRegistrateMyBankCard({
       cardNumberInputForm,
-      validity,
-      owner,
-      cvc,
+      validityInputForm,
+      ownerInputForm,
+      cvcInputForm,
       token,
     });
     props.history.push("/personal");
@@ -85,8 +92,8 @@ const PersonalAreaForm = props => {
                 label="Срок действия"
                 color="secondary"
                 type="text"
-                value={validity}
-                name="validity"
+                value={validityInputForm}
+                name="validityInputForm"
                 onChange={handleChangeCardValidity}
                 className="textField"
                 required
@@ -99,8 +106,8 @@ const PersonalAreaForm = props => {
                 label="Имя владельца"
                 color="secondary"
                 type="text"
-                value={owner}
-                name="owner"
+                value={ownerInputForm}
+                name="ownerInputForm"
                 onChange={handleChangeCardOwner}
                 className="textField"
                 required
@@ -109,8 +116,8 @@ const PersonalAreaForm = props => {
                 label="CVC"
                 color="secondary"
                 type="text"
-                name="cvc"
-                value={cvc}
+                name="cvcInputForm"
+                value={cvcInputForm}
                 onChange={handleChangeCardCVC}
                 className="textField"
                 required
@@ -130,6 +137,9 @@ const mapStateToProps = state => {
   return {
     token: getToken(state),
     cardNumber: getCardNumber(state),
+    validity: getCardValidity(state),
+    owner: getCardOwner(state),
+    cvc: getCardCVC(state),
   };
 };
 
