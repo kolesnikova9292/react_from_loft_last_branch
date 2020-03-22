@@ -36,12 +36,18 @@ const PersonalAreaForm = props => {
   }
 
   useEffect(() => {
-    fetchBankCardData().then(() => {
-      if (cardNumber != null) setCardNumber(cardNumber);
-      if (validity != null) setValidity(validity);
-      if (owner != null) setOwner(owner);
-      if (cvc != null) setCVC(cvc);
-    });
+    if (cardNumber == null) {
+      fetchBankCardData(); /*.then(() => {
+        if (cardNumber != null) setCardNumber(cardNumber);
+        if (validity != null) setValidity(validity);
+        if (owner != null) setOwner(owner);
+        if (cvc != null) setCVC(cvc);
+      });*/
+    }
+    if (cardNumber != null) setCardNumber(cardNumber);
+    if (validity != null) setValidity(validity);
+    if (owner != null) setOwner(owner);
+    if (cvc != null) setCVC(cvc);
   }, [cardNumber, validity, owner, cvc]);
 
   const handleCardParams = async event => {
