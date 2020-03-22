@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 import Card from "@material-ui/core/Card";
@@ -8,18 +8,45 @@ import {
   fetchBankCardInformation,
   fetchRegistrateMyBankCard,
 } from "../../providers/redux/modules/bankCard";
+import { getToken } from "../../providers/redux/modules/auth";
+import { getCardNumber } from "../../providers/redux/modules/bankCard";
 
 const PersonalAreaForm = props => {
-  const { fetchRegistrateMyBankCard } = props;
-  const { cardNumber, setCardNumber } = useState("");
-  const { validity, setValidity } = useState("");
-  const { owner, setOwner } = useState("");
-  const { cvc, setCVC } = useState("");
+  const {
+    fetchRegistrateMyBankCard,
+    token,
+    fetchBankCardInformation,
+    cardNumber,
+  } = props;
+  const [cardNumberInputForm, setCardNumber] = useState("");
+  const [validity, setValidity] = useState("");
+  const [owner, setOwner] = useState("");
+  const [cvc, setCVC] = useState("");
+
+  async function fetchBankCardData() {
+    await fetchBankCardInformation(token);
+    console.log(cardNumber);
+    /*const res = await fetch("https://swapi.co/api/planets/4/");
+    res
+      .json()
+      .then(res => setPlanets(res))
+      .catch(err => setErrors(err));*/
+  }
+
+  useEffect(() => {
+    fetchBankCardData();
+  });
 
   const handleCardParams = async event => {
     event.preventDefault();
-    await fetchRegistrateMyBankCard({ cardNumber, validity, owner, cvc });
-    props.history.push("/map");
+    await fetchRegistrateMyBankCard({
+      cardNumberInputForm,
+      validity,
+      owner,
+      cvc,
+      token,
+    });
+    props.history.push("/personal");
   };
 
   const handleChangeCardNumber = event => {
@@ -48,8 +75,8 @@ const PersonalAreaForm = props => {
                 label="Номер карты"
                 color="secondary"
                 type="text"
-                value={cardNumber}
-                name="cardNumber"
+                value={cardNumberInputForm}
+                name="cardNumberInputForm"
                 onChange={handleChangeCardNumber}
                 className="textField"
                 required
@@ -99,8 +126,18 @@ const PersonalAreaForm = props => {
   );
 };
 
-const mapDispatchToProps = { fetchRegistrateMyBankCard };
+const mapStateToProps = state => {
+  return {
+    token: getToken(state),
+    cardNumber: getCardNumber(state),
+  };
+};
 
-export default connect(null, mapDispatchToProps)(PersonalAreaForm);
+const mapDispatchToProps = {
+  fetchRegistrateMyBankCard,
+  fetchBankCardInformation,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalAreaForm);
 
 //<form onSubmit={handleCardParams}></form>

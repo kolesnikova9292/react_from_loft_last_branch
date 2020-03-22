@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { loftTaxiMiddleware } from "./modules/auth";
+import { loftTaxiMiddlewareForBankCard } from "./modules/bankCard";
 import thunk from "redux-thunk";
 import rootReducer from "./modules";
 
@@ -13,7 +14,7 @@ export const initialState = {
       localStorage.getItem("accessToken") == undefined ? false : true,
     error: null,
   },
-  bank_card: {
+  bankCard: {
     number: null,
     validity: null,
     owner: null,
@@ -24,7 +25,11 @@ export const initialState = {
 const store = createStore(
   rootReducer,
   initialState,
-  compose(applyMiddleware(thunk), applyMiddleware(loftTaxiMiddleware))
+  compose(
+    applyMiddleware(thunk),
+    applyMiddleware(loftTaxiMiddleware),
+    applyMiddleware(loftTaxiMiddlewareForBankCard)
+  )
   /*compose(
     applyMiddleware(loftTaxiMiddleware),
     window.__REDUX_DEVTOOLS_EXTENSION__
