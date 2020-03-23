@@ -30,7 +30,6 @@ export function renderWithRedux(
     ),
   } = {}
 ) {
-  console.log(store.isAuthorized);
   return {
     ...render(<Provider store={store}>{ui}</Provider>),
     // adding `store` to the returned utilities to allow us
