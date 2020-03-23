@@ -38,7 +38,12 @@ const Header = props => {
               <Button component={Link} to="/map" id="my-map">
                 Карта
               </Button>
-              <Button component={Link} to="/personal" id="personal-area">
+              <Button
+                component={Link}
+                to="/personal"
+                id="personal-area"
+                data-testid="personal-area"
+              >
                 Профиль
               </Button>
               <Button component={Link} to="/logout" id="logout">
