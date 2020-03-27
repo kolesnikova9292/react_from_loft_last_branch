@@ -42,8 +42,10 @@ export const loftTaxiMiddleware = store => next => async action => {
         if (res.data.success === true) {
           store.dispatch(fetchRegistrationSucces(res));
         } else {
-          console.log(res.data.error);
-          store.dispatch(fetchRegistrationFailure(res.data.error));
+          if (res.data.error != undefined) {
+            console.log(res.data.error);
+            store.dispatch(fetchRegistrationFailure(res.data.error));
+          }
         }
       })
       .catch(err => {
