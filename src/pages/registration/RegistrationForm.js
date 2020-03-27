@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { fetchRegistrationRequest } from "../../providers/redux/modules/auth";
 
 const RegistrationForm = props => {
+  //console.log(777777777777777777777);
+
   const { fetchRegistrationRequest } = props;
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -14,15 +16,24 @@ const RegistrationForm = props => {
   const [lastname, setLastname] = useState("");
 
   const handleRegistration = async event => {
-    event.preventDefault();
-    await fetchRegistrationRequest({
-      email: login,
-      password: password,
-      name: firstname,
-      surname: lastname,
-    });
+    try {
+      console.log(777777777777777777777);
+      event.preventDefault();
+      console.log(fetchRegistrationRequest);
 
-    props.history.push("/map");
+      await fetchRegistrationRequest({
+        email: login,
+        password: password,
+        name: firstname,
+        surname: lastname,
+      });
+
+      props.history.push("/map");
+    } catch (error) {
+      console.log(6666666666666);
+      console.log(error);
+      // your catch block code goes here
+    }
   };
 
   const handleLoginChange = event => {

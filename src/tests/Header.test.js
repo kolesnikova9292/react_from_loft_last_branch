@@ -12,9 +12,9 @@ describe("Header", () => {
     let onActionMock1 = jest.fn();
     let onActionMock2 = jest.fn();
 
-    it("click on map button", () => {
+    it("check login button", () => {
       console.log(Header);
-      const { getAllByText } = renderWithRedux(
+      const { getByText } = renderWithRedux(
         <BrowserRouter>
           <Header />
         </BrowserRouter>,
@@ -22,81 +22,36 @@ describe("Header", () => {
           initialState: initialStateNotAuth,
         }
       );
-      /*const { getAllByText } = renderWithRedux(
-        <App>
-          <Header />
-        </App>,
-        {
-          initialState: initialStateNotAuth,
-        }
-      );*/
-      /*const { getByText } = renderWithRedux(
+      const node = getByText("Войти");
+      expect(node).not.toBeNull();
+    });
+
+    it("check personal area button", () => {
+      console.log(Header);
+      const { queryByTestId } = renderWithRedux(
         <BrowserRouter>
           <Header />
         </BrowserRouter>,
         {
           initialState: initialStateAuthTrue,
         }
-      );*/
-
-      //const node = getByText("Карта");
-      //expect(node).not.toBeNull();
-    });
-
-    /*it("click on personal area", () => {
-      const { getByText } = render(
-        <BrowserRouter>
-          <AuthContext.Provider
-            value={{
-              isAuthorized: true,
-              loginContext: onActionMock1,
-              logout: onActionMock2,
-            }}
-          >
-            <Header showMapEvent={onActionMock} />
-          </AuthContext.Provider>
-        </BrowserRouter>
       );
-
-      const node = getByText("Профиль");
+      const node = queryByTestId("personal-area");
       expect(node).not.toBeNull();
     });
 
-    it("click on logout button", () => {
-      const { getByText } = render(
+    it("check personal area button", () => {
+      console.log(Header);
+      const { getByText } = renderWithRedux(
         <BrowserRouter>
-          <AuthContext.Provider
-            value={{
-              isAuthorized: true,
-              loginContext: onActionMock1,
-              logout: onActionMock2,
-            }}
-          >
-            <Header showMapEvent={onActionMock} />
-          </AuthContext.Provider>
-        </BrowserRouter>
+          <Header />
+        </BrowserRouter>,
+        {
+          initialState: initialStateAuthTrue,
+        }
       );
-
       const node = getByText("Выйти");
       expect(node).not.toBeNull();
     });
-    it("click on logout button", () => {
-      const { getByText } = render(
-        <BrowserRouter>
-          <AuthContext.Provider
-            value={{
-              isAuthorized: false,
-              loginContext: onActionMock1,
-              logout: onActionMock2,
-            }}
-          >
-            <Header showMapEvent={onActionMock} />
-          </AuthContext.Provider>
-        </BrowserRouter>
-      );
-
-      const node = getByText("Войти");
-      expect(node).not.toBeNull();
-    });*/
   });
 });

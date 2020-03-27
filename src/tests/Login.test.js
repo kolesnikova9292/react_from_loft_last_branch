@@ -1,111 +1,76 @@
 import React from "react";
 import App from "../App";
-import { AuthContext } from "../providers/AuthContext";
 import { Login } from "../pages/login/index";
 import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
+import { renderWithRedux } from "./renderWithRedux";
+import { initialStateNotAuth } from "./initialStateNotAuth";
+import { initialStateAuthTrue } from "./initialStateAuthTrue";
 
 describe("Login", () => {
   describe("rendering of login", () => {
-    let onActionMock = jest.fn();
-    let onActionMock1 = jest.fn();
-    let onActionMock2 = jest.fn();
     it("check rendering", () => {
-      let onActionMock = jest.fn();
-      const { getByText } = render(
-        <AuthContext.Provider
-          value={{
-            isAuthorized: false,
-            loginContext: onActionMock1,
-            logout: onActionMock2,
-          }}
-        >
+      const { getByText } = renderWithRedux(
+        <BrowserRouter>
           <Login />
-        </AuthContext.Provider>
+        </BrowserRouter>,
+        {
+          initialState: initialStateNotAuth,
+        }
       );
+
       const items = getByText("Войти");
       expect(items).not.toBeNull();
-      //fireEvent.submit(items);
-      //expect(onActionMock1).toBeCalled();
     });
     it("check rendering fields", () => {
-      let onActionMock = jest.fn();
-      const { getByText } = render(
+      const { getByText } = renderWithRedux(
         <BrowserRouter>
-          <AuthContext.Provider
-            value={{
-              isAuthorized: false,
-              loginContext: onActionMock1,
-              logout: onActionMock2,
-            }}
-          >
-            <Login />
-          </AuthContext.Provider>
-        </BrowserRouter>
+          <Login />
+        </BrowserRouter>,
+        {
+          initialState: initialStateNotAuth,
+        }
       );
       const items = getByText("Логин");
       expect(items).not.toBeNull();
     });
     it("check rendering fields", () => {
-      let onActionMock = jest.fn();
-      const { getByText } = render(
+      const { getByText } = renderWithRedux(
         <BrowserRouter>
-          <AuthContext.Provider
-            value={{
-              isAuthorized: false,
-              loginContext: onActionMock1,
-              logout: onActionMock2,
-            }}
-          >
-            <Login />
-          </AuthContext.Provider>
-        </BrowserRouter>
+          <Login />
+        </BrowserRouter>,
+        {
+          initialState: initialStateNotAuth,
+        }
       );
       const items = getByText("Пароль");
       expect(items).not.toBeNull();
     });
     it("check rendering registration button", () => {
-      let onActionMock = jest.fn();
-      const { getByText } = render(
+      const { getByText } = renderWithRedux(
         <BrowserRouter>
-          <AuthContext.Provider
-            value={{
-              isAuthorized: false,
-              loginContext: onActionMock1,
-              logout: onActionMock2,
-            }}
-          >
-            <Login />
-          </AuthContext.Provider>
-        </BrowserRouter>
+          <Login />
+        </BrowserRouter>,
+        {
+          initialState: initialStateNotAuth,
+        }
       );
       const items = getByText("Перейти на регистрацию");
       expect(items).not.toBeNull();
-      //fireEvent.submit(items);
-      //expect(onActionMock1).toBeCalled();
     });
 
     it("check rendering logout context function", () => {
       localStorage.setItem("accessToken", "answer.token");
       window.confirm = jest.fn();
-      let onActionMock = jest.fn();
-      const { getByText } = render(
+      renderWithRedux(
         <BrowserRouter>
-          <AuthContext.Provider
-            value={{
-              isAuthorized: true,
-              loginContext: onActionMock1,
-              logout: onActionMock2,
-            }}
-          >
-            <Login />
-          </AuthContext.Provider>
-        </BrowserRouter>
+          <Login goAway={true} />
+        </BrowserRouter>,
+        {
+          initialState: initialStateAuthTrue,
+        }
       );
       expect(window.confirm).toBeCalled();
-      //const items = getByText("Вы уверены, что хотите выйти");
-      //expect(items).not.toBeNull();
-      //expect(onActionMock2).toBeCalled();
     });
   });
 });
