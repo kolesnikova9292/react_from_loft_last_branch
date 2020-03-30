@@ -9,8 +9,8 @@ import axiosMock from "axios";
 
 jest.mock("axios");
 
-describe("Login", () => {
-  describe("rendering of login", () => {
+describe("PersonalArea", () => {
+  describe("rendering of personal area", () => {
     it("check rendering", () => {
       jest.mock("axios");
       const historyMock = { push: jest.fn() };
@@ -127,7 +127,7 @@ describe("Login", () => {
       expect(items).not.toBeNull();
     });
 
-    it("check rendering fields", async () => {
+    it("check step to server", async () => {
       jest.mock("axios");
       const historyMock = { push: jest.fn() };
       axiosMock.post.mockResolvedValueOnce({

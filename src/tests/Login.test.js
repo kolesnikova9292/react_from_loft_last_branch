@@ -1,7 +1,5 @@
 import React from "react";
-import App from "../App";
 import { Login } from "../pages/login/index";
-import { render, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { renderWithRedux } from "./renderWithRedux";
 import { initialStateNotAuth } from "./initialStateNotAuth";

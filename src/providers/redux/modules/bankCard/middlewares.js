@@ -8,8 +8,6 @@ import axios from "axios";
 
 export const loftTaxiMiddlewareForBankCard = store => next => async action => {
   if (action.type === fetchBankCardInformation.toString()) {
-    console.log(action.payload);
-    console.log(action.payload.token);
     await axios
       .get("http://loft-taxi.glitch.me/card?token=" + action.payload)
       .then(data => {
@@ -24,19 +22,16 @@ export const loftTaxiMiddlewareForBankCard = store => next => async action => {
     await axios.post(
       "http://loft-taxi.glitch.me/card",
       {
-        cardNumber: action.payload.cardNumber,
-        expiryDate: action.payload.validity,
-        cardName: action.payload.owner,
-        cvc: action.payload.cvc,
+        cardNumber: action.payload.cardNumberInputForm,
+        expiryDate: action.payload.validityInputForm,
+        cardName: action.payload.ownerInputForm,
+        cvc: action.payload.cvcInputForm,
         token: action.payload.token,
       },
       {
         "Content-Type": "application/json",
       }
     );
-    // .then(data => {
-    //   console.log(data);
-    // });
   }
 
   const result = next(action);

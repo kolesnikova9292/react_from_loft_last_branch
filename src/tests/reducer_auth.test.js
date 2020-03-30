@@ -9,11 +9,8 @@ import {
 } from "../providers/redux/modules/auth";
 
 describe("Reducers", () => {
-  describe("CheckReducers", () => {
-    let action;
-
-    it("CheckReducers First Test User Loading", () => {
-      //token({}, fetchAuthRequest({ "login", "password" }));
+  describe("Check auth reducer", () => {
+    it("check token isAuth error reducers", () => {
       const initialState = {
         token: null,
         isAuthorized: false,
@@ -31,46 +28,88 @@ describe("Reducers", () => {
       });
     });
 
-    /*  it("CheckReducers First Test User Already Loaded", () => {
-      action = {
-        type: USER_LOADED,
-      };
-
-      expect(authReducer(initialState, action)).toEqual({
+    it("check token isAuth error reducers", () => {
+      const initialState = {
         token: null,
-        isAuthenticated: true,
-        isLoading: false,
+        isAuthorized: false,
+        error: null,
+      };
+      expect(
+        reducer(initialState, fetchAuthSucces({ data: { token: "token" } }))
+      ).toEqual({
+        token: "token",
+        isAuthorized: true,
+        error: null,
       });
     });
 
-    it("CheckReducers First Test User Login With Success", () => {
-      action = {
-        type: LOGIN_SUCCESS,
-        payload: {
-          token: null,
-        },
-      };
-
-      expect(authReducer(initialState, action)).toEqual({
+    it("check token isAuth error reducers", () => {
+      const initialState = {
         token: null,
-        isAuthenticated: true,
-        isLoading: false,
+        isAuthorized: false,
+        error: null,
+      };
+      expect(
+        reducer(initialState, fetchAuthFailure({ error: "error" }))
+      ).toEqual({
+        token: null,
+        isAuthorized: false,
+        error: "error",
       });
     });
 
-    it("CheckReducers First Test User Login With Faylier", () => {
-      action = {
-        type: REGISTER_FAIL,
-        payload: {
-          token: null,
-        },
-      };
-
-      expect(authReducer(initialState, action)).toEqual({
+    it("check token isAuth error reducers for registration", () => {
+      const initialState = {
         token: null,
-        isAuthenticated: false,
-        isLoading: false,
+        isAuthorized: false,
+        error: null,
+      };
+      expect(
+        reducer(
+          initialState,
+          fetchRegistrationRequest({
+            login: "login",
+            password: "password",
+            name: "name",
+            surname: "surname",
+          })
+        )
+      ).toEqual({
+        token: null,
+        isAuthorized: false,
+        error: null,
       });
-    });*/
+    });
+
+    it("check token isAuth error reducer regostration", () => {
+      const initialState = {
+        token: null,
+        isAuthorized: false,
+        error: null,
+      };
+      expect(
+        reducer(
+          initialState,
+          fetchRegistrationSucces({ data: { token: "token" } })
+        )
+      ).toEqual({
+        token: "token",
+        isAuthorized: true,
+        error: null,
+      });
+    });
+
+    it("check token isAuth error reducer registration", () => {
+      const initialState = {
+        token: null,
+        isAuthorized: false,
+        error: null,
+      };
+      expect(reducer(initialState, fetchRegistrationFailure("error"))).toEqual({
+        token: null,
+        isAuthorized: false,
+        error: "error",
+      });
+    });
   });
 });

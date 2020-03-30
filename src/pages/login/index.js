@@ -8,13 +8,3 @@ export const Login = props => {
     </>
   );
 };
-
-/*const mapStateToProps = state => {
-  return {
-    token: state.token,
-    isAuthorized: state.isAuthorized,
-  };
-};
-const mapDispatchToProps = { getAuthRequest };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);*/
