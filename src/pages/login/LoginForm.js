@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import "./Login.css";
 import Card from "@material-ui/core/Card";
@@ -9,11 +9,19 @@ import {
   fetchAuthRequest,
   logoutUser,
 } from "../../providers/redux/modules/auth";
+import { getAuthFlag } from "../../providers/redux/modules/auth";
 
 const LoginForm = props => {
-  const { fetchAuthRequest, logoutUser } = props;
+  const { fetchAuthRequest, logoutUser, isAuthorized } = props;
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    console.log(isAuthorized);
+    if (isAuthorized == true) {
+      props.history.push("/map");
+    }
+  }, [isAuthorized]);
 
   if (props.goAway === true) {
     if (window.confirm("Вы уверены, что хотите выйти?")) {
@@ -25,10 +33,33 @@ const LoginForm = props => {
     }
   }
 
+  /*const refreshToken = async (login, password) => {
+    return await fetchAuthRequest({ login, password });
+  };*/
+
+  async function refreshToken(login, password) {
+    return await fetchAuthRequest({ login, password });
+  }
+
   const handleLogIn = async event => {
     event.preventDefault();
     await fetchAuthRequest({ login, password });
-    props.history.push("/map");
+    // console.log("endednedn");
+    // props.history.push("/map");
+    //refreshToken(login, password).then(() => console.log(222));
+    /* let result = await refreshToken(login, password);
+    result.then(res => {
+      console.log("endednedn");
+      props.history.push("/map");
+    });*/
+
+    //await fetchAuthRequest({ login, password });
+    /* refreshToken(login, password).then(res => {
+      //await refreshToken;
+      console.log(res);
+      console.log("endednedn");
+      props.history.push("/map");
+    });*/
   };
 
   const goToRegistration = event => {
@@ -78,7 +109,13 @@ const LoginForm = props => {
 
 const mapDispatchToProps = { fetchAuthRequest, logoutUser };
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+const mapStateToProps = state => {
+  return {
+    isAuthorized: getAuthFlag(state),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
 
 //const mapStateToProps = state => state;
 //const mapDispatchToProps = { getAuthRequest };

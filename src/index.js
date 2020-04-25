@@ -8,6 +8,8 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import store from "./providers/redux/store";
 import { Provider } from "react-redux";
 
+//const state = store.getState();
+
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
