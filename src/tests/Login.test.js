@@ -60,9 +60,10 @@ describe("Login", () => {
     it("check rendering logout context function", () => {
       localStorage.setItem("accessToken", "answer.token");
       window.confirm = jest.fn();
+      const historyMock = { push: jest.fn() };
       renderWithRedux(
         <BrowserRouter>
-          <Login goAway={true} />
+          <Login goAway={true} history={historyMock} />
         </BrowserRouter>,
         {
           initialState: initialStateAuthTrue,

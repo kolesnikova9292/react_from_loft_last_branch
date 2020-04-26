@@ -17,49 +17,58 @@ import axios from "axios";
 
 export function* paymentSaga() {
   console.log(111);
-  yield takeEvery(fetchRegistrateMyBankCard, function*(action) {
-    console.log(222);
-    try {
-      const {
-        cardNumberInputForm,
-        validityInputForm,
-        ownerInputForm,
-        cvcInputForm,
-        token,
-      } = action.payload;
-      const result = yield call(
-        fetchBankCardInformationRegistrateAxios,
-        cardNumberInputForm,
-        validityInputForm,
-        ownerInputForm,
-        cvcInputForm,
-        token
-      );
-      console.log(result);
-    } catch (error) {
-      put(fetchBankCardInformationFail(error));
-    }
-  });
+  yield takeEvery(fetchRegistrateMyBankCard, geteratorForPaymentSaga);
 
-  yield takeEvery(fetchBankCardInformation, function*(action) {
-    try {
-      const { token } = action.payload;
-      console.log(action.payload);
-      const result = yield call(
-        fetchBankCardInformationGetInfoAxios,
-        action.payload
-      );
-      console.log(result);
-      if (result.statusText === "OK") {
-        yield put(fetchBankCardInformationSuccess(result));
-      } else yield put(fetchBankCardInformationFail(result.data.error));
-    } catch (error) {
-      fetchBankCardInformationFail(error);
-    }
-  });
+  yield takeEvery(
+    fetchBankCardInformation,
+    generatorForPaymentSagaGetInformation
+  );
 }
 
-const fetchBankCardInformationRegistrateAxios = async (
+export function* generatorForPaymentSagaGetInformation(action) {
+  try {
+    const { token } = action.payload;
+    console.log(action.payload);
+    const result = yield call(
+      fetchBankCardInformationGetInfoAxios,
+      action.payload
+    );
+    console.log(result);
+    console.log(result.statusText);
+    if (result.statusText === "OK") {
+      console.log(5555555555);
+      yield put(fetchBankCardInformationSuccess(result));
+    } else yield put(fetchBankCardInformationFail(result.data.error));
+  } catch (error) {
+    fetchBankCardInformationFail(error);
+  }
+}
+
+export function* geteratorForPaymentSaga(action) {
+  console.log(222);
+  try {
+    const {
+      cardNumberInputForm,
+      validityInputForm,
+      ownerInputForm,
+      cvcInputForm,
+      token,
+    } = action.payload;
+    const result = yield call(
+      fetchBankCardInformationRegistrateAxios,
+      cardNumberInputForm,
+      validityInputForm,
+      ownerInputForm,
+      cvcInputForm,
+      token
+    );
+    console.log(result);
+  } catch (error) {
+    put(fetchBankCardInformationFail(error));
+  }
+}
+
+export const fetchBankCardInformationRegistrateAxios = async (
   cardNumber,
   expiryDate,
   cardName,
@@ -81,7 +90,7 @@ const fetchBankCardInformationRegistrateAxios = async (
   );
 };
 
-const fetchBankCardInformationGetInfoAxios = async token => {
+export const fetchBankCardInformationGetInfoAxios = async token => {
   console.log(token);
   return await axios.get("http://loft-taxi.glitch.me/card?token=" + token);
 };
