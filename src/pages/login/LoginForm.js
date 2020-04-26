@@ -17,7 +17,6 @@ const LoginForm = props => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    console.log(isAuthorized);
     if (isAuthorized == true) {
       props.history.push("/map");
     }
@@ -44,22 +43,6 @@ const LoginForm = props => {
   const handleLogIn = async event => {
     event.preventDefault();
     await fetchAuthRequest({ login, password });
-    // console.log("endednedn");
-    // props.history.push("/map");
-    //refreshToken(login, password).then(() => console.log(222));
-    /* let result = await refreshToken(login, password);
-    result.then(res => {
-      console.log("endednedn");
-      props.history.push("/map");
-    });*/
-
-    //await fetchAuthRequest({ login, password });
-    /* refreshToken(login, password).then(res => {
-      //await refreshToken;
-      console.log(res);
-      console.log("endednedn");
-      props.history.push("/map");
-    });*/
   };
 
   const goToRegistration = event => {

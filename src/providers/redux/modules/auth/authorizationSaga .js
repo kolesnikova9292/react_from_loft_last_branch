@@ -1,8 +1,8 @@
-import { takeEvery, call, put, fork } from "redux-saga/effects";
+import { takeEvery, call, put } from "redux-saga/effects";
 import { fetchAuthRequest, fetchAuthSucces, fetchAuthFailure } from "./actions";
 import axios from "axios";
 
-export function* handleAuthentification() {
+export function* authorizationSaga() {
   yield takeEvery(fetchAuthRequest, function*(action) {
     try {
       const { login, password } = action.payload;
@@ -10,7 +10,6 @@ export function* handleAuthentification() {
       const result = yield call(fetchAuthRequestFirst, login, password);
 
       if (result.data.success === true) {
-        console.log(111);
         yield put(fetchAuthSucces(result));
       } else {
         yield put(fetchAuthFailure(result.data.error));

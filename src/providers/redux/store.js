@@ -1,10 +1,8 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import { loftTaxiMiddleware } from "./modules/auth";
 import { loftTaxiMiddlewareForBankCard } from "./modules/bankCard";
 import thunk from "redux-thunk";
 import rootReducer from "./modules";
 import createSagaMiddleware from "redux-saga";
-import { handleAuthentification } from "./modules/auth/sagas";
 import Sagas from "./modules/saga";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -33,8 +31,8 @@ const store = createStore(
   compose(
     applyMiddleware(thunk),
     //applyMiddleware(loftTaxiMiddleware),
-    applyMiddleware(sagaMiddleware),
-    applyMiddleware(loftTaxiMiddlewareForBankCard)
+    applyMiddleware(sagaMiddleware)
+    //applyMiddleware(loftTaxiMiddlewareForBankCard)
   )
 );
 
