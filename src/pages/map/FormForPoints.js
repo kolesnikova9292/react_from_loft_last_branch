@@ -48,16 +48,18 @@ const FormForPoints = props => {
   };
 
   const handleFirstPointChange = event => {
-    setFirstPoint(event.target.value);
+    console.log(8484848484848484);
+    setFirstPoint(event.target.innerHTML);
+    console.log(event.target.innerHTML);
     setAdressListWithKeyForSecondPoint(
-      removeItemOnce(adressListWithKeyForSecondPoint, event.target.value)
+      removeItemOnce(adressListWithKeyForSecondPoint, event.target.innerHTML)
     );
   };
 
   const handleSecondPointChange = event => {
-    setSecondPoint(event.target.value);
+    setSecondPoint(event.target.innerHTML);
     setAdressListWithKeyForFirstPoint(
-      removeItemOnce(adressListWithKeyForFirstPoint, event.target.value)
+      removeItemOnce(adressListWithKeyForFirstPoint, event.target.innerHTML)
     );
   };
 
@@ -79,6 +81,7 @@ const FormForPoints = props => {
           listOfObjects={adressListWithKeyForFirstPoint}
           nameOfLabel="Точка А"
         />
+        <br />
         <InnerMap
           point={second_point}
           handleOfChangePoint={handleSecondPointChange}

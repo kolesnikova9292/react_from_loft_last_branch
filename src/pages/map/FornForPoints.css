@@ -26,3 +26,17 @@
     margin-top: 5%!important;
 }
 
+.warning{
+    width: 80%;
+    margin: 0 auto!important;
+    margin-top: 10%!important;
+    text-align: center;
+
+
+}
+
+.buttonForWarning{
+    margin-top: 5%!important;
+    margin-left: 25%!important;
+}
+
