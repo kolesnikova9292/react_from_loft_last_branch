@@ -23,6 +23,7 @@ export const initialState = {
     owner: null,
     cvc: null,
   },
+  adresses: null,
 };
 
 const store = createStore(

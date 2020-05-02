@@ -1,0 +1,28 @@
+.divForForm{
+    width: 350px!important;
+    height: 200px;
+    background-color: white;
+    padding-top: 5%;
+}
+
+.divForFormOuter{
+    position: absolute;
+    top:15%;
+    left:5%;
+}
+
+.formWithFields{
+    width: 80%;
+    margin: 0 auto!important;
+}
+
+.formControl{
+    width: 100%;
+    margin-bottom: 3%!important;
+}
+
+.buttonForForm{
+    margin-left: 20%!important;
+    margin-top: 5%!important;
+}
+
