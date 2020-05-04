@@ -32,15 +32,29 @@ const FormForPoints = props => {
       var resultOfMap = adressList.map((x, index) => {
         return { adress: x, key: index };
       });
-      setAdressListWithKey(resultOfMap);
+      setAdressListWithKey(resultOfMap.map(object => ({ ...object })));
       setAdressListWithKeyForFirstPoint(
         resultOfMap.map(object => ({ ...object }))
       );
       setAdressListWithKeyForSecondPoint(
         resultOfMap.map(object => ({ ...object }))
       );
+      if (first_point !== "" && first_point != null) {
+        setAdressListWithKeyForSecondPoint(
+          resultOfMap.filter(function(value) {
+            return value.adress !== first_point;
+          })
+        );
+      }
+      if (second_point !== "" && second_point != null) {
+        setAdressListWithKeyForFirstPoint(
+          resultOfMap.filter(function(value) {
+            return value.adress !== second_point;
+          })
+        );
+      }
     }
-  }, [adressList]);
+  }, [adressList, first_point, second_point]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -48,29 +62,29 @@ const FormForPoints = props => {
   };
 
   const handleFirstPointChange = event => {
-    console.log(8484848484848484);
     setFirstPoint(event.target.innerHTML);
-    console.log(event.target.innerHTML);
-    setAdressListWithKeyForSecondPoint(
-      removeItemOnce(adressListWithKeyForSecondPoint, event.target.innerHTML)
-    );
+    /*if (!event.target.getAttribute("aria-hidden")) {
+      setFirstPoint(event.target.innerHTML);
+    } else {
+      setAdressListWithKeyForSecondPoint(adressListWithKey);
+      setAdressListWithKeyForFirstPoint(adressListWithKey);
+    }*/
   };
 
   const handleSecondPointChange = event => {
     setSecondPoint(event.target.innerHTML);
-    setAdressListWithKeyForFirstPoint(
-      removeItemOnce(adressListWithKeyForFirstPoint, event.target.innerHTML)
-    );
+    /*if (!event.target.getAttribute("aria-hidden")) {
+      console.log(adressListWithKey);
+      setSecondPoint(event.target.innerHTML);
+      setAdressListWithKeyForFirstPoint(adressListWithKey);
+      //setAdressListWithKeyForFirstPoint(
+      // removeItemOnce(adressListWithKeyForFirstPoint, event.target.innerHTML)
+      // );
+    } else {
+      setAdressListWithKeyForFirstPoint(adressListWithKey);
+      setAdressListWithKeyForSecondPoint(adressListWithKey);
+    }*/
   };
-
-  function removeItemOnce(arr, value) {
-    var choosenItem = arr.find(x => x.adress === value);
-    var index = arr.indexOf(choosenItem);
-    if (index > -1) {
-      arr.splice(index, 1);
-    }
-    return arr;
-  }
 
   return (
     <div className="divForForm">

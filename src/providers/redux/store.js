@@ -24,6 +24,7 @@ export const initialState = {
     cvc: null,
   },
   adresses: null,
+  route: null,
 };
 
 const store = createStore(

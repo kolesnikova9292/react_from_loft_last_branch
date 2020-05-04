@@ -8,7 +8,13 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const InnerMap = props => {
-  const { point, handleOfChangePoint, listOfObjects, nameOfLabel } = props;
+  const {
+    point,
+    handleOfChangePoint,
+    listOfObjects,
+    nameOfLabel,
+    handleClose,
+  } = props;
   return (
     <>
       <Autocomplete

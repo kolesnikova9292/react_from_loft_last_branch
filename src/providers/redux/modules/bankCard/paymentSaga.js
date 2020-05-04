@@ -16,7 +16,6 @@ import axios from "axios";
         token: action.payload.token,*/
 
 export function* paymentSaga() {
-  console.log(111);
   yield takeEvery(fetchRegistrateMyBankCard, geteratorForPaymentSaga);
 
   yield takeEvery(
@@ -28,15 +27,11 @@ export function* paymentSaga() {
 export function* generatorForPaymentSagaGetInformation(action) {
   try {
     const { token } = action.payload;
-    console.log(action.payload);
     const result = yield call(
       fetchBankCardInformationGetInfoAxios,
       action.payload
     );
-    console.log(result);
-    console.log(result.statusText);
     if (result.statusText === "OK") {
-      console.log(5555555555);
       yield put(fetchBankCardInformationSuccess(result));
     } else yield put(fetchBankCardInformationFail(result.data.error));
   } catch (error) {
@@ -45,7 +40,6 @@ export function* generatorForPaymentSagaGetInformation(action) {
 }
 
 export function* geteratorForPaymentSaga(action) {
-  console.log(222);
   try {
     const {
       cardNumberInputForm,
@@ -62,7 +56,6 @@ export function* geteratorForPaymentSaga(action) {
       cvcInputForm,
       token
     );
-    console.log(result);
   } catch (error) {
     put(fetchBankCardInformationFail(error));
   }
@@ -91,6 +84,5 @@ export const fetchBankCardInformationRegistrateAxios = async (
 };
 
 export const fetchBankCardInformationGetInfoAxios = async token => {
-  console.log(token);
   return await axios.get("http://loft-taxi.glitch.me/card?token=" + token);
 };

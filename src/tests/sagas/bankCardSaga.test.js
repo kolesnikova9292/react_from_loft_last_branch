@@ -23,8 +23,6 @@ describe("set of tests for bank card", () => {
 
   it("information about bank card success", () => {
     const clone = iterator.clone();
-
-    //console.log(clone.next({ statusText: "OK" }).value);
     expect(clone.next({ statusText: "OK" }).value).toEqual(
       put(fetchBankCardInformationSuccess({ statusText: "OK" }))
     );
