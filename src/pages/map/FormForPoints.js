@@ -63,27 +63,10 @@ const FormForPoints = props => {
 
   const handleFirstPointChange = event => {
     setFirstPoint(event.target.innerHTML);
-    /*if (!event.target.getAttribute("aria-hidden")) {
-      setFirstPoint(event.target.innerHTML);
-    } else {
-      setAdressListWithKeyForSecondPoint(adressListWithKey);
-      setAdressListWithKeyForFirstPoint(adressListWithKey);
-    }*/
   };
 
   const handleSecondPointChange = event => {
     setSecondPoint(event.target.innerHTML);
-    /*if (!event.target.getAttribute("aria-hidden")) {
-      console.log(adressListWithKey);
-      setSecondPoint(event.target.innerHTML);
-      setAdressListWithKeyForFirstPoint(adressListWithKey);
-      //setAdressListWithKeyForFirstPoint(
-      // removeItemOnce(adressListWithKeyForFirstPoint, event.target.innerHTML)
-      // );
-    } else {
-      setAdressListWithKeyForFirstPoint(adressListWithKey);
-      setAdressListWithKeyForSecondPoint(adressListWithKey);
-    }*/
   };
 
   return (
