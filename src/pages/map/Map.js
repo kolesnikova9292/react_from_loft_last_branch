@@ -38,11 +38,8 @@ const Map = props => {
   };
 
   const getPointsFromForm = async point => {
-    console.log(point);
     fetchForRouteRequest(point);
   };
-
-  console.log(route);
 
   return (
     <div className="main">

@@ -18,56 +18,11 @@ const MapField = props => {
     pitch: 0,
   });
 
-  const [viewportNew, setViewportNew] = useState({});
-
   let mapRef = React.createRef();
 
   useEffect(() => {
-    console.log(route);
-    /*if (route !== null) {
-      setViewportNew({
-          longitude: route.data[0][0],
-          latitude: route.data[0][1],
-          zoom: 15,
-          width: "100%",
-          height: 500,
-      });
-      mapRef.current.props.onViewportChange(viewportNew);
-      drawRoute(mapRef.current.getMap(), route.data, this.mapRef.current);
-    }*/
-
     if (route !== null) {
       setTimeout(drawRoute, 1000, mapRef.current.getMap(), route);
-      //if (mapRef.current.getMap().getLayer("route")) {
-      //  console.log(55555555555555555555);
-      //  mapRef.current.getMap().removeLayer("route");
-      // }
-      //mapRef.current.getMap().eachLayer(function(layer) {
-      //  mapRef.current.getMap().removeLayer(layer);
-      //});
-      //drawRoute(mapRef.current.getMap(), route);
-      /* mapRef.current.getMap().on("style.load", () => {
-        console.log("________");
-        const waiting = () => {
-          console.log(mapRef.current.getMap().isStyleLoaded());
-          if (!mapRef.current.getMap().isStyleLoaded()) {
-            setTimeout(waiting, 200);
-          } else {
-            drawRoute(mapRef.current.getMap(), route);
-          }
-        };
-        waiting();
-      });*/
-      /* mapRef.current.getMap().on("styledata", () => {
-        const waiting = () => {
-          if (!mapRef.current.getMap().isStyleLoaded()) {
-            setTimeout(waiting, 200);
-          } else {
-            drawRoute(mapRef.current.getMap(), route);
-          }
-        };
-        waiting();
-      });*/
     }
   }, [route]);
 

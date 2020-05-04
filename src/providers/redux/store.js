@@ -30,12 +30,7 @@ export const initialState = {
 const store = createStore(
   rootReducer,
   initialState,
-  compose(
-    applyMiddleware(thunk),
-    //applyMiddleware(loftTaxiMiddleware),
-    applyMiddleware(sagaMiddleware)
-    //applyMiddleware(loftTaxiMiddlewareForBankCard)
-  )
+  compose(applyMiddleware(thunk), applyMiddleware(sagaMiddleware))
 );
 
 sagaMiddleware.run(Sagas);

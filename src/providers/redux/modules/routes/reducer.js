@@ -1,5 +1,4 @@
 import { handleActions } from "redux-actions";
-import { combineReducers } from "redux";
 import {
   fetchForRouteSuccess,
   fetchForRouteFail,
@@ -18,6 +17,3 @@ const route = handleActions(
 );
 
 export default route;
-//export default combineReducers({
-//  adresses,
-//});

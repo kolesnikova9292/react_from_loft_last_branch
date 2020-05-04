@@ -6,12 +6,7 @@ import Header from "./header/Header";
 import ChoosePage from "./pages/ChoosePage";
 
 const App = () => {
-  const [showPage, setShowPage] = useState(
-    //localStorage.getItem("accessToken") === null ? 4 : 2
-    4
-  );
-
-  //localStorage.removeItem("accessToken");
+  const [showPage, setShowPage] = useState(4);
 
   const showMapEvent = idOfButton => {
     switch (idOfButton) {
@@ -47,8 +42,3 @@ const App = () => {
 };
 
 export default App;
-
-/*const mapStateToProps = state => state;
-const mapDispatchToProps = { getAuthRequest };
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);*/

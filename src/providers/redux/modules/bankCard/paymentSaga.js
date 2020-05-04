@@ -9,12 +9,6 @@ import {
 import { takeEvery, call, put } from "redux-saga/effects";
 import axios from "axios";
 
-/*cardNumber: action.payload.cardNumberInputForm,
-        expiryDate: action.payload.validityInputForm,
-        cardName: action.payload.ownerInputForm,
-        cvc: action.payload.cvcInputForm,
-        token: action.payload.token,*/
-
 export function* paymentSaga() {
   yield takeEvery(fetchRegistrateMyBankCard, geteratorForPaymentSaga);
 

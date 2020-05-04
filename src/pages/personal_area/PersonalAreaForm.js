@@ -148,5 +148,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PersonalAreaForm);
-
-//<form onSubmit={handleCardParams}></form>

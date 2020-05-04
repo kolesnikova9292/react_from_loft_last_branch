@@ -1,5 +1,4 @@
 import { handleActions } from "redux-actions";
-import { combineReducers } from "redux";
 import {
   fetchForListOfAdressesSuccess,
   fetchForListOfAdressesFail,
@@ -15,6 +14,3 @@ const adresses = handleActions(
 );
 
 export default adresses;
-//export default combineReducers({
-//  adresses,
-//});

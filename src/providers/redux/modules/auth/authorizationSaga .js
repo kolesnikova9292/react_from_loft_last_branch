@@ -28,14 +28,5 @@ export const fetchAuthRequestFirst = (login, password) => {
     { email: login, password: password },
     { headers: { "Content-Type": "application/json" } }
   );
-  //.then(res => res);
-  // .then(response => {
-  //   return response;
-  //  });
   return res;
-  // .then(data => {
-  //   if (data.data.success === true) store.dispatch(fetchAuthSucces(data));
-  //    else store.dispatch(fetchAuthFailure(data.data.error));
-  //  })
-  // .catch(error => store.dispatch(fetchAuthFailure(error)));
 };

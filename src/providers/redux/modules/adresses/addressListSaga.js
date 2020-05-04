@@ -19,7 +19,7 @@ export function* generatorForAdressList() {
       yield put(fetchForListOfAdressesFail());
     }
   } catch (error) {
-    //put(fetchAuthFailure(error));
+    put(fetchForListOfAdressesFail());
   }
 }
 

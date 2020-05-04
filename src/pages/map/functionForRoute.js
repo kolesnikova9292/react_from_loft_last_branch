@@ -5,7 +5,6 @@ export const drawRoute = (map, coordinates) => {
   });
 
   if (map.getLayer("route")) {
-    console.log(55555555555555555555);
     map.removeLayer("route");
   }
 
