@@ -15,6 +15,8 @@ import {
   getCardOwner,
   getCardCVC,
 } from "../../providers/redux/modules/bankCard";
+import { useForm } from "react-hook-form";
+import { RHFInput } from "react-hook-form-input";
 
 const PersonalAreaForm = props => {
   const {
@@ -26,36 +28,76 @@ const PersonalAreaForm = props => {
     owner,
     cvc,
   } = props;
-  const [cardNumberInputForm, setCardNumber] = useState("");
-  const [validityInputForm, setValidity] = useState("");
+  //const [cardNumber, setCardNumber] = useState("");
+  /*const [validityInputForm, setValidity] = useState("");
   const [ownerInputForm, setOwner] = useState("");
-  const [cvcInputForm, setCVC] = useState("");
+  const [cvcInputForm, setCVC] = useState("");*/
+  const {
+    register,
+    handleSubmit,
+    errors,
+    reset,
+    setValue,
+  } = useForm(/*{
+    defaultValues: {
+      cardNumber: cardNumber,
+      validity: validity,
+      owner: owner,
+      cvc: cvc,
+    },
+  }*/);
 
   async function fetchBankCardData() {
     await fetchBankCardInformation(token);
   }
 
   useEffect(() => {
-    fetchBankCardData();
-    if (cardNumber != null) setCardNumber(cardNumber);
+    if (cardNumber == null) {
+      fetchBankCardData();
+    }
+    //register({ cardNumber: cardNumber });
+    setValue("cardNumber", cardNumber);
+    setValue("validity", validity);
+    setValue("owner", owner);
+    setValue("cvc", cvc);
+    /*reset(
+      {
+        cardNumber: cardNumber,
+        validity: validity,
+        owner: owner,
+        cvc: cvc,
+      },
+      {
+        touched: true,
+      }
+    );*/
+
+    /*if (cardNumber != null) setCardNumber(cardNumber);
     if (validity != null) setValidity(validity);
     if (owner != null) setOwner(owner);
-    if (cvc != null) setCVC(cvc);
-  }, [cardNumber, validity, owner, cvc]);
+    if (cvc != null) setCVC(cvc);*/
+    console.log(cardNumber);
+  }, [cardNumber, validity, owner, cvc, reset, setValue]);
 
-  const handleCardParams = async event => {
-    event.preventDefault();
+  const handleCardParams = async data => {
+    //event.preventDefault();
+    const { cardNumber, validity, owner, cvc } = data;
+    console.log(cardNumber, validity, owner, cvc);
     await fetchRegistrateMyBankCard({
-      cardNumberInputForm,
-      validityInputForm,
-      ownerInputForm,
-      cvcInputForm,
+      cardNumber,
+      validity,
+      owner,
+      cvc,
       token,
     });
     props.history.push("/personal");
   };
 
-  const handleChangeCardNumber = event => {
+  /* const handleChangeCardNumber = event => {
+    setCardNumber(event.target.value);
+  };*/
+
+  /*const handleChangeCardNumber = event => {
     setCardNumber(event.target.value);
   };
 
@@ -69,58 +111,118 @@ const PersonalAreaForm = props => {
 
   const handleChangeCardCVC = event => {
     setCVC(event.target.value);
-  };
+  };*/
 
   return (
     <div className="commonDiv">
-      <form onSubmit={handleCardParams} className="myForm">
+      <form className="myForm" onSubmit={handleSubmit(handleCardParams)}>
         <div className="divForFormPersonal">
           <div className="divForFormPersonalChild">
             <Card>
-              <TextField
+              <RHFInput
+                as={
+                  <TextField
+                    label="Номер карты"
+                    color="secondary"
+                    type="text"
+                    className="textField"
+                    error={errors.cardNumber != null ? true : false}
+                  />
+                }
+                rules={{ required: true }}
+                name="cardNumber"
+                register={register}
+                setValue={setValue}
+              />
+              <RHFInput
+                as={
+                  <TextField
+                    label="Срок действия"
+                    color="secondary"
+                    type="text"
+                    className="textField"
+                    error={errors.validity != null ? true : false}
+                  />
+                }
+                rules={{ required: true }}
+                name="validity"
+                register={register}
+                setValue={setValue}
+              />
+              {/*<TextField
                 label="Номер карты"
                 color="secondary"
                 type="text"
-                value={cardNumberInputForm}
-                name="cardNumberInputForm"
-                onChange={handleChangeCardNumber}
+                name="cardNumber"
                 className="textField"
-                required
+                error={errors.cardNumber != null ? true : false}
+                inputRef={register({ required: true })}
+                defaultValue={cardNumber}
+                onChange={([event]) => event.target.value}
+
+                //defaultValue={cardNumber != null ? cardNumber : null}
               />
               <TextField
                 label="Срок действия"
                 color="secondary"
                 type="text"
-                value={validityInputForm}
-                name="validityInputForm"
-                onChange={handleChangeCardValidity}
+                name="validity"
                 className="textField"
-                required
-              />
+                error={errors.validity != null ? true : false}
+                inputRef={register({ required: true })}
+              />*/}
             </Card>
           </div>
           <div className="divForFormPersonalChild">
             <Card>
-              <TextField
+              <RHFInput
+                as={
+                  <TextField
+                    label="Имя владельца"
+                    color="secondary"
+                    type="text"
+                    className="textField"
+                    error={errors.owner != null ? true : false}
+                  />
+                }
+                rules={{ required: true }}
+                name="owner"
+                register={register}
+                setValue={setValue}
+              />
+              <RHFInput
+                as={
+                  <TextField
+                    label="CVC"
+                    color="secondary"
+                    type="text"
+                    className="textField"
+                    error={errors.cvc != null ? true : false}
+                  />
+                }
+                rules={{ required: true }}
+                name="cvc"
+                register={register}
+                setValue={setValue}
+              />
+              {/*<TextField
                 label="Имя владельца"
                 color="secondary"
                 type="text"
-                value={ownerInputForm}
-                name="ownerInputForm"
-                onChange={handleChangeCardOwner}
+                name="owner"
                 className="textField"
-                required
+                error={errors.owner != null ? true : false}
+                inputRef={register({ required: true })}
               />
               <TextField
                 label="CVC"
                 color="secondary"
                 type="text"
-                name="cvcInputForm"
-                value={cvcInputForm}
-                onChange={handleChangeCardCVC}
+                name="cvc"
                 className="textField"
-                required
-              />
+                error={errors.cvc != null ? true : false}
+                inputRef={register({ required: true })}
+              />*/}
             </Card>
           </div>
         </div>

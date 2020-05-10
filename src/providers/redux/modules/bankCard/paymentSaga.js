@@ -35,19 +35,13 @@ export function* generatorForPaymentSagaGetInformation(action) {
 
 export function* geteratorForPaymentSaga(action) {
   try {
-    const {
-      cardNumberInputForm,
-      validityInputForm,
-      ownerInputForm,
-      cvcInputForm,
-      token,
-    } = action.payload;
+    const { cardNumber, validity, owner, cvc, token } = action.payload;
     const result = yield call(
       fetchBankCardInformationRegistrateAxios,
-      cardNumberInputForm,
-      validityInputForm,
-      ownerInputForm,
-      cvcInputForm,
+      cardNumber,
+      validity,
+      owner,
+      cvc,
       token
     );
   } catch (error) {

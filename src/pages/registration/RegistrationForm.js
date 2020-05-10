@@ -5,18 +5,23 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 import { fetchRegistrationRequest } from "../../providers/redux/modules/auth";
+import { useForm } from "react-hook-form";
+import { returnError } from "../login/LoginForm";
 
 const RegistrationForm = props => {
   const { fetchRegistrationRequest } = props;
-  const [login, setLogin] = useState("");
+  const { register, handleSubmit, errors } = useForm();
+  /*const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+  const [lastname, setLastname] = useState("");*/
 
-  const handleRegistration = async event => {
+  const handleRegistration = async data => {
     try {
-      event.preventDefault();
-
+      //event.preventDefault();
+      const { login, password, firstname, lastname } = data;
+      console.log(data);
+      console.log(login, password, firstname, lastname);
       await fetchRegistrationRequest({
         email: login,
         password: password,
@@ -30,7 +35,7 @@ const RegistrationForm = props => {
     }
   };
 
-  const handleLoginChange = event => {
+  /*const handleLoginChange = event => {
     setLogin(event.target.value);
   };
 
@@ -44,20 +49,24 @@ const RegistrationForm = props => {
 
   const handleFirstnameChange = event => {
     setFirstname(event.target.value);
-  };
+  };*/
 
   return (
     <div className="divForForm">
       <Card className="cardForForm">
-        <form onSubmit={handleRegistration}>
+        <form onSubmit={handleSubmit(handleRegistration)}>
           <TextField
             id="standard-secondary"
             label="Логин"
             color="secondary"
             type="text"
-            value={login}
             name="login"
-            onChange={handleLoginChange}
+            error={errors.login != null ? true : false}
+            inputRef={register({
+              required: true,
+              pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i,
+            })}
+            helperText={returnError(errors.login)}
           />
           <TextField
             id="standard-secondary"
@@ -65,8 +74,9 @@ const RegistrationForm = props => {
             color="secondary"
             type="text"
             name="password"
-            value={password}
-            onChange={handlePasswordChange}
+            error={errors.password != null ? true : false}
+            inputRef={register({ required: true })}
+            helperText={returnError(errors.password)}
           />
           <TextField
             id="standard-secondary"
@@ -74,8 +84,9 @@ const RegistrationForm = props => {
             color="secondary"
             type="text"
             name="lastname"
-            value={lastname}
-            onChange={handleLastnameChange}
+            error={errors.lastname != null ? true : false}
+            inputRef={register({ required: true, pattern: /^[a-zA-Z '.-]*$/i })}
+            helperText={returnError(errors.lastname)}
           />
           <TextField
             id="standard-secondary"
@@ -83,8 +94,9 @@ const RegistrationForm = props => {
             color="secondary"
             type="text"
             name="firstname"
-            value={firstname}
-            onChange={handleFirstnameChange}
+            error={errors.firstname != null ? true : false}
+            inputRef={register({ required: true, pattern: /^[a-zA-Z '.-]*$/i })}
+            helperText={returnError(errors.firstname)}
           />
           <div>
             <Button type="submit" value="">
