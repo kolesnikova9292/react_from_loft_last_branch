@@ -10,25 +10,35 @@ import {
   logoutUser,
 } from "../../providers/redux/modules/auth";
 import { getAuthFlag } from "../../providers/redux/modules/auth";
+import { getError } from "../../providers/redux/modules/auth";
 import { useForm } from "react-hook-form";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const LoginForm = props => {
-  const { fetchAuthRequest, logoutUser, isAuthorized } = props;
+  const { fetchAuthRequest, logoutUser, isAuthorized, error } = props;
   const { register, handleSubmit, errors } = useForm();
   //console.log(errors);
   //const [login, setLogin] = useState("");
   //const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false);
+
+  console.log(error);
 
   useEffect(() => {
     if (isAuthorized === true) {
       props.history.push("/map");
     }
-  }, [isAuthorized]);
+    if (error != null) {
+      setOpen(true);
+    }
+  }, [isAuthorized, error]);
 
   if (props.goAway === true) {
     if (window.confirm("Вы уверены, что хотите выйти?")) {
       logoutUser();
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("first_point");
+      localStorage.removeItem("second_point");
       return <Redirect to="/login" />;
     } else {
       return <Redirect to="/map" />;
@@ -49,6 +59,11 @@ const LoginForm = props => {
     props.history.push("/registration");
   };
 
+  const handleCloseSnackBar = () => {
+    setOpen(false);
+  };
+
+  console.log(open);
   /*const handleChangeLogin = event => {
     setLogin(event.target.value);
   };
@@ -108,6 +123,18 @@ const LoginForm = props => {
         </form>
         <Button onClick={goToRegistration}>Перейти на регистрацию</Button>
       </Card>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        open={open}
+        onClose={handleCloseSnackBar}
+        ContentProps={{
+          "aria-describedby": "message-id",
+        }}
+        message={<span id="message-id">{error}</span>}
+      />
     </div>
   );
 };
@@ -117,6 +144,7 @@ const mapDispatchToProps = { fetchAuthRequest, logoutUser };
 const mapStateToProps = state => {
   return {
     isAuthorized: getAuthFlag(state),
+    error: getError(state),
   };
 };
 

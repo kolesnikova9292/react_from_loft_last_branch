@@ -133,6 +133,7 @@ const PersonalAreaForm = props => {
                 name="cardNumber"
                 register={register}
                 setValue={setValue}
+                data-testid="test_cardNumber_field"
               />
               <RHFInput
                 as={
@@ -148,6 +149,7 @@ const PersonalAreaForm = props => {
                 name="validity"
                 register={register}
                 setValue={setValue}
+                data-testid="test_validity_field"
               />
               {/*<TextField
                 label="Номер карты"
@@ -189,6 +191,7 @@ const PersonalAreaForm = props => {
                 name="owner"
                 register={register}
                 setValue={setValue}
+                data-testid="test_owner_field"
               />
               <RHFInput
                 as={
@@ -204,6 +207,7 @@ const PersonalAreaForm = props => {
                 name="cvc"
                 register={register}
                 setValue={setValue}
+                data-testid="test_cvc_field"
               />
               {/*<TextField
                 label="Имя владельца"

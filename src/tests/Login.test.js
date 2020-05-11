@@ -7,6 +7,9 @@ import { initialStateAuthTrue } from "./initialStateAuthTrue";
 
 describe("Login", () => {
   describe("rendering of login", () => {
+    beforeEach(() => {
+      require("mutationobserver-shim");
+    });
     it("check rendering", () => {
       const { getByText } = renderWithRedux(
         <BrowserRouter>

@@ -6,6 +6,9 @@ import { initialStateNotAuth } from "./initialStateNotAuth";
 
 describe("App", () => {
   describe("rendering of app", () => {
+    beforeEach(() => {
+      require("mutationobserver-shim");
+    });
     it("find lets go! in header", () => {
       const { getAllByText } = renderWithRedux(
         <BrowserRouter>

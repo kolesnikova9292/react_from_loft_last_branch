@@ -32,8 +32,11 @@ const isAuthorized = handleActions(
 
 const error = handleActions(
   {
-    [fetchAuthFailure]: (_state, action) => action.payload.error,
+    [fetchAuthFailure]: (_state, action) => action.payload,
     [fetchRegistrationFailure]: (_state, action) => action.payload,
+    [fetchAuthSucces]: () => null,
+    [fetchRegistrationSucces]: () => null,
+    [logoutUser]: () => null,
   },
   null
 );
