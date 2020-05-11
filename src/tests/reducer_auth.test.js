@@ -49,9 +49,7 @@ describe("Reducers", () => {
         isAuthorized: false,
         error: null,
       };
-      expect(
-        reducer(initialState, fetchAuthFailure({ error: "error" }))
-      ).toEqual({
+      expect(reducer(initialState, fetchAuthFailure("error"))).toEqual({
         token: null,
         isAuthorized: false,
         error: "error",
