@@ -78,6 +78,57 @@ const PersonalAreaForm = props => {
     setOpen(false);
   };
 
+  const cardNumderChanging = e => {
+    console.log(111);
+    console.log(e.target);
+    const { value } = e.target;
+    console.log(value);
+    if (!value) {
+      e.target.value = "";
+    }
+    const match =
+      value
+        .replace(/\D/g, "")
+        // console.log(match);
+        .substring(0, 16)
+        .match(/.{1,4}/g) || [];
+    e.target.value = match.join(" ");
+    setValue("cardNumber", e.target.value);
+  };
+
+  const validityChanging = e => {
+    const { value } = e.target;
+    if (!value) {
+      e.target.value = "";
+    }
+    const match =
+      value
+        .replace(/\D/g, "")
+        .substring(0, 4)
+        .match(/.{1,2}/g) || [];
+    e.target.value = match.join("/");
+    setValue("validity", e.target.value);
+  };
+
+  const ownerChanging = e => {
+    const { value } = e.target;
+    if (!value) {
+      e.target.value = "";
+    }
+    const match = value.replace(/\d/g, "").toUpperCase();
+
+    setValue("owner", match);
+  };
+
+  const cvcChanging = e => {
+    const { value } = e.target;
+    if (!value) {
+      e.target.value = "";
+    }
+    const match = value.replace(/\D/g, "").substring(0, 3);
+    setValue("cvc", match);
+  };
+
   return (
     <div className="commonDiv">
       <form className="myForm" onSubmit={handleSubmit(handleCardParams)}>
@@ -94,7 +145,12 @@ const PersonalAreaForm = props => {
                     error={errors.cardNumber != null ? true : false}
                   />
                 }
-                rules={{ required: true }}
+                onChange={cardNumderChanging}
+                rules={{
+                  required: true,
+                  pattern: /^\d{4} \d{4} \d{4} \d{4}$/i,
+                }}
+                helperText={returnError(errors.cardNumber)}
                 name="cardNumber"
                 register={register}
                 setValue={setValue}
@@ -110,8 +166,13 @@ const PersonalAreaForm = props => {
                     error={errors.validity != null ? true : false}
                   />
                 }
-                rules={{ required: true }}
+                rules={{
+                  required: true,
+                  pattern: /^(0[1-9]|1[0-2])\/([0-9]{2})$/i,
+                }}
+                helperText={returnError(errors.validity)}
                 name="validity"
+                onChange={validityChanging}
                 register={register}
                 setValue={setValue}
                 data-testid="test_validity_field"
@@ -130,7 +191,9 @@ const PersonalAreaForm = props => {
                     error={errors.owner != null ? true : false}
                   />
                 }
-                rules={{ required: true }}
+                onChange={ownerChanging}
+                rules={{ required: true, pattern: /^[A-Z]* [A-Z]*$/i }}
+                helperText={returnError(errors.owner)}
                 name="owner"
                 register={register}
                 setValue={setValue}
@@ -146,7 +209,9 @@ const PersonalAreaForm = props => {
                     error={errors.cvc != null ? true : false}
                   />
                 }
-                rules={{ required: true }}
+                onChange={cvcChanging}
+                rules={{ required: true, pattern: /^\d{3}$/i }}
+                helperText={returnError(errors.cvc)}
                 name="cvc"
                 register={register}
                 setValue={setValue}
@@ -189,5 +254,13 @@ const mapDispatchToProps = {
   fetchRegistrateMyBankCard,
   fetchBankCardInformation,
 };
+
+export function returnError(error) {
+  return error !== undefined && error.type === "required"
+    ? "Поле обязательно"
+    : error !== undefined && error.type === "pattern"
+    ? "Недопустимый формат"
+    : null;
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(PersonalAreaForm);
