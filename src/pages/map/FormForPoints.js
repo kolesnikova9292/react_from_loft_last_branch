@@ -26,13 +26,6 @@ const FormForPoints = props => {
   }
 
   useEffect(() => {
-    if (
-      localStorage.getItem("first_point") &&
-      localStorage.getItem("second_point")
-    ) {
-      setFirstPoint(localStorage.getItem("first_point"));
-      setSecondPoint(localStorage.getItem("second_point"));
-    }
     if (adressList == null) {
       fetchAdresses();
     } else {
@@ -52,7 +45,6 @@ const FormForPoints = props => {
             return value.adress !== first_point;
           })
         );
-        localStorage.setItem("first_point", first_point);
       }
       if (second_point !== "" && second_point != null) {
         setAdressListWithKeyForFirstPoint(
@@ -60,7 +52,6 @@ const FormForPoints = props => {
             return value.adress !== second_point;
           })
         );
-        localStorage.setItem("second_point", second_point);
       }
     }
   }, [adressList, first_point, second_point]);

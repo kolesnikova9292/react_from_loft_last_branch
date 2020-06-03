@@ -13,7 +13,6 @@ const InnerMap = props => {
         options={listOfObjects}
         getOptionLabel={option => option.adress}
         style={{ width: 300 }}
-        inputValue={point}
         renderInput={params => (
           <TextField {...params} label={nameOfLabel} variant="outlined" />
         )}
