@@ -23,7 +23,7 @@ const RegistrationForm = props => {
     if (error != null) {
       setOpen(true);
     }
-  }, [isAuthorized, error]);
+  }, [isAuthorized, error, open]);
 
   const handleRegistration = async data => {
     try {
