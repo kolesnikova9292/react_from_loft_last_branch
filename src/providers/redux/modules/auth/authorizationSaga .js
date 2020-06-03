@@ -15,7 +15,6 @@ export function* authGeneratorFunction(action) {
     if (result.data.success === true) {
       yield put(fetchAuthSucces(result));
     } else {
-      console.log(result.data.error);
       yield put(fetchAuthFailure(result.data.error));
     }
   } catch (error) {

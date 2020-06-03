@@ -6,7 +6,7 @@ import { drawRoute } from "./functionForRoute";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoianVsaWFydXNzaWFuZmVkZXJhdGlvbi" +
-  "IsImEiOiJjazJpbmIxeHUwbTY2M2NtbHpxYW4weGZzIn0.-GVUqir7oT7vVGOU6OokLA"; // Set your mapbox token here
+  "IsImEiOiJjazJpbmIxeHUwbTY2M2NtbHpxYW4weGZzIn0.-GVUqir7oT7vVGOU6OokLA";
 
 const MapField = props => {
   const { route } = props;

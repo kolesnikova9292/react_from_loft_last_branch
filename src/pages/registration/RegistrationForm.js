@@ -15,10 +15,6 @@ const RegistrationForm = props => {
   const { fetchRegistrationRequest, error, isAuthorized } = props;
   const { register, handleSubmit, errors } = useForm();
   const [open, setOpen] = useState(false);
-  /*const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");*/
 
   useEffect(() => {
     if (isAuthorized === true) {
@@ -31,42 +27,16 @@ const RegistrationForm = props => {
 
   const handleRegistration = async data => {
     try {
-      //event.preventDefault();
       const { login, password, firstname, lastname } = data;
-      console.log(data);
-      console.log(login, password, firstname, lastname);
-      console.log(fetchRegistrationRequest);
+
       await fetchRegistrationRequest({
         email: login,
         password: password,
         name: firstname,
         surname: lastname,
       });
-      /*if (error == null) {
-        props.history.push("/map");
-      } else {
-        setOpen(true);
-      }*/
-    } catch (error) {
-      // your catch block code goes here
-    }
+    } catch (error) {}
   };
-
-  /*const handleLoginChange = event => {
-    setLogin(event.target.value);
-  };
-
-  const handlePasswordChange = event => {
-    setPassword(event.target.value);
-  };
-
-  const handleLastnameChange = event => {
-    setLastname(event.target.value);
-  };
-
-  const handleFirstnameChange = event => {
-    setFirstname(event.target.value);
-  };*/
 
   const handleCloseSnackBar = () => {
     setOpen(false);

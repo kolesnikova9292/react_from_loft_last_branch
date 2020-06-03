@@ -26,16 +26,13 @@ const FormForPoints = props => {
   }
 
   useEffect(() => {
-    console.log(localStorage.getItem("first_point"));
     if (
       localStorage.getItem("first_point") &&
       localStorage.getItem("second_point")
     ) {
-      console.log(5555555555555555555);
       setFirstPoint(localStorage.getItem("first_point"));
       setSecondPoint(localStorage.getItem("second_point"));
     }
-    console.log(first_point);
     if (adressList == null) {
       fetchAdresses();
     } else {

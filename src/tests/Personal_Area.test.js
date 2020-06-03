@@ -199,8 +199,6 @@ describe("PersonalArea", () => {
         fireEvent.submit(items);
       });
       expect(axiosMock.post).toHaveBeenCalledTimes(1);
-      //fireEvent.submit(items);
-      //expect(axiosMock.post).toHaveBeenCalledTimes(1);
     });
   });
 });

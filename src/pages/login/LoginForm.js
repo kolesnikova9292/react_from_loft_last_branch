@@ -13,25 +13,23 @@ import { getAuthFlag } from "../../providers/redux/modules/auth";
 import { getError } from "../../providers/redux/modules/auth";
 import { useForm } from "react-hook-form";
 import Snackbar from "@material-ui/core/Snackbar";
+import { RHFInput } from "react-hook-form-input";
 
 const LoginForm = props => {
   const { fetchAuthRequest, logoutUser, isAuthorized, error } = props;
-  const { register, handleSubmit, errors } = useForm();
-  //console.log(errors);
-  //const [login, setLogin] = useState("");
-  //const [password, setPassword] = useState("");
+  const { register, handleSubmit, errors, setValue } = useForm();
   const [open, setOpen] = useState(false);
 
-  console.log(error);
-
   useEffect(() => {
+    setValue("login", "email@example.com");
+    setValue("password", "password");
     if (isAuthorized === true) {
       props.history.push("/map");
     }
     if (error != null) {
       setOpen(true);
     }
-  }, [isAuthorized, error]);
+  }, [isAuthorized, error, setValue]);
 
   if (props.goAway === true) {
     if (window.confirm("Вы уверены, что хотите выйти?")) {
@@ -46,11 +44,8 @@ const LoginForm = props => {
   }
 
   const handleLogIn = async data => {
-    //event.preventDefault();
-    console.log(data);
     const { login, password } = data;
-    console.log(login);
-    console.log(password);
+
     await fetchAuthRequest({ login, password });
   };
 
@@ -63,20 +58,48 @@ const LoginForm = props => {
     setOpen(false);
   };
 
-  console.log(open);
-  /*const handleChangeLogin = event => {
-    setLogin(event.target.value);
-  };
-
-  const handleChangePassword = event => {
-    setPassword(event.target.value);
-  };*/
-
   return (
     <div className="divForForm">
       <Card className="cardForForm">
         <form onSubmit={handleSubmit(handleLogIn)}>
-          <TextField
+          <RHFInput
+            as={
+              <TextField
+                className="textFieldForLoginForm"
+                label="Логин"
+                color="secondary"
+                type="text"
+                error={errors.login != null ? true : false}
+              />
+            }
+            rules={{
+              required: true,
+              pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i,
+            }}
+            helperText={returnError(errors.login)}
+            name="login"
+            register={register}
+            setValue={setValue}
+          />
+          <br />
+          <RHFInput
+            as={
+              <TextField
+                label="Пароль"
+                color="secondary"
+                type="text"
+                className="textFieldForLoginForm"
+                error={errors.password != null ? true : false}
+              />
+            }
+            helperText={returnError(errors.password)}
+            rules={{ required: true }}
+            name="password"
+            register={register}
+            setValue={setValue}
+          />
+          <br />
+          {/*<TextField
             className="textFieldForLoginForm"
             label="Логин"
             color="secondary"
@@ -87,14 +110,8 @@ const LoginForm = props => {
               required: true,
               pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i,
             })}
-            helperText={
-              returnError(errors.login)
-              /* errors.login !== undefined && errors.login.type === "required"
-                ? "Поле обязательно"
-                : errors.login !== undefined && errors.login.type === "pattern"
-                ? "Недопустимый формат"
-                : null*/
-            }
+            helperText={returnError(errors.login)}
+            setValue={setValue}
           />
           <br />
           <TextField
@@ -105,18 +122,9 @@ const LoginForm = props => {
             className="textFieldForLoginForm"
             inputRef={register({ required: true })}
             error={errors.password != null ? true : false}
-            helperText={
-              returnError(errors.password)
-              /* errors.password !== undefined &&
-              errors.password.type === "required"
-                ? "Поле обязательно"
-                : errors.password !== undefined &&
-                  errors.password.type === "pattern"
-                ? "Недопустимый формат"
-                : null*/
-            }
+            helperText={returnError(errors.password)}
           />
-          <br />
+          <br />*/}
           <Button type="submit" value="Войти">
             Войти
           </Button>
@@ -157,84 +165,3 @@ export function returnError(error) {
     ? "Недопустимый формат"
     : null;
 }
-
-/*const LoginForm = props => {
-  const { fetchAuthRequest, logoutUser, isAuthorized } = props;
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
-
-  useEffect(() => {
-    if (isAuthorized == true) {
-      props.history.push("/map");
-    }
-  }, [isAuthorized]);
-
-  if (props.goAway === true) {
-    if (window.confirm("Вы уверены, что хотите выйти?")) {
-      logoutUser();
-      localStorage.removeItem("accessToken");
-      return <Redirect to="/login" />;
-    } else {
-      return <Redirect to="/map" />;
-    }
-  }
-
-  const handleLogIn = async event => {
-    event.preventDefault();
-    await fetchAuthRequest({ login, password });
-  };
-
-  const goToRegistration = event => {
-    event.preventDefault();
-    props.history.push("/registration");
-  };
-
-  const handleChangeLogin = event => {
-    setLogin(event.target.value);
-  };
-
-  const handleChangePassword = event => {
-    setPassword(event.target.value);
-  };
-
-  return (
-    <div className="divForForm">
-      <Card className="cardForForm">
-        <form onSubmit={handleLogIn}>
-          <TextField
-            label="Логин"
-            color="secondary"
-            type="text"
-            value={login}
-            name="login"
-            onChange={handleChangeLogin}
-          />
-          <br />
-          <TextField
-            label="Пароль"
-            color="secondary"
-            type="text"
-            name="password"
-            value={password}
-            onChange={handleChangePassword}
-          />
-          <br />
-          <Button type="submit" value="Войти">
-            Войти
-          </Button>
-        </form>
-        <Button onClick={goToRegistration}>Перейти на регистрацию</Button>
-      </Card>
-    </div>
-  );
-};
-
-const mapDispatchToProps = { fetchAuthRequest, logoutUser };
-
-const mapStateToProps = state => {
-  return {
-    isAuthorized: getAuthFlag(state),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);*/

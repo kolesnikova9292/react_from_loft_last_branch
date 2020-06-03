@@ -5,7 +5,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const InnerMap = props => {
   const { point, handleOfChangePoint, listOfObjects, nameOfLabel } = props;
-  console.log(point);
+
   return (
     <>
       <Autocomplete

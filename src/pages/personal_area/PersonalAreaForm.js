@@ -28,24 +28,8 @@ const PersonalAreaForm = props => {
     owner,
     cvc,
   } = props;
-  //const [cardNumber, setCardNumber] = useState("");
-  /*const [validityInputForm, setValidity] = useState("");
-  const [ownerInputForm, setOwner] = useState("");
-  const [cvcInputForm, setCVC] = useState("");*/
-  const {
-    register,
-    handleSubmit,
-    errors,
-    reset,
-    setValue,
-  } = useForm(/*{
-    defaultValues: {
-      cardNumber: cardNumber,
-      validity: validity,
-      owner: owner,
-      cvc: cvc,
-    },
-  }*/);
+
+  const { register, handleSubmit, errors, reset, setValue } = useForm();
 
   async function fetchBankCardData() {
     await fetchBankCardInformation(token);
@@ -55,34 +39,14 @@ const PersonalAreaForm = props => {
     if (cardNumber == null) {
       fetchBankCardData();
     }
-    //register({ cardNumber: cardNumber });
     setValue("cardNumber", cardNumber);
     setValue("validity", validity);
     setValue("owner", owner);
     setValue("cvc", cvc);
-    /*reset(
-      {
-        cardNumber: cardNumber,
-        validity: validity,
-        owner: owner,
-        cvc: cvc,
-      },
-      {
-        touched: true,
-      }
-    );*/
-
-    /*if (cardNumber != null) setCardNumber(cardNumber);
-    if (validity != null) setValidity(validity);
-    if (owner != null) setOwner(owner);
-    if (cvc != null) setCVC(cvc);*/
-    console.log(cardNumber);
   }, [cardNumber, validity, owner, cvc, reset, setValue]);
 
   const handleCardParams = async data => {
-    //event.preventDefault();
     const { cardNumber, validity, owner, cvc } = data;
-    console.log(cardNumber, validity, owner, cvc);
     await fetchRegistrateMyBankCard({
       cardNumber,
       validity,
@@ -92,26 +56,6 @@ const PersonalAreaForm = props => {
     });
     props.history.push("/personal");
   };
-
-  /* const handleChangeCardNumber = event => {
-    setCardNumber(event.target.value);
-  };*/
-
-  /*const handleChangeCardNumber = event => {
-    setCardNumber(event.target.value);
-  };
-
-  const handleChangeCardValidity = event => {
-    setValidity(event.target.value);
-  };
-
-  const handleChangeCardOwner = event => {
-    setOwner(event.target.value);
-  };
-
-  const handleChangeCardCVC = event => {
-    setCVC(event.target.value);
-  };*/
 
   return (
     <div className="commonDiv">
@@ -151,28 +95,6 @@ const PersonalAreaForm = props => {
                 setValue={setValue}
                 data-testid="test_validity_field"
               />
-              {/*<TextField
-                label="Номер карты"
-                color="secondary"
-                type="text"
-                name="cardNumber"
-                className="textField"
-                error={errors.cardNumber != null ? true : false}
-                inputRef={register({ required: true })}
-                defaultValue={cardNumber}
-                onChange={([event]) => event.target.value}
-
-                //defaultValue={cardNumber != null ? cardNumber : null}
-              />
-              <TextField
-                label="Срок действия"
-                color="secondary"
-                type="text"
-                name="validity"
-                className="textField"
-                error={errors.validity != null ? true : false}
-                inputRef={register({ required: true })}
-              />*/}
             </Card>
           </div>
           <div className="divForFormPersonalChild">
@@ -209,24 +131,6 @@ const PersonalAreaForm = props => {
                 setValue={setValue}
                 data-testid="test_cvc_field"
               />
-              {/*<TextField
-                label="Имя владельца"
-                color="secondary"
-                type="text"
-                name="owner"
-                className="textField"
-                error={errors.owner != null ? true : false}
-                inputRef={register({ required: true })}
-              />
-              <TextField
-                label="CVC"
-                color="secondary"
-                type="text"
-                name="cvc"
-                className="textField"
-                error={errors.cvc != null ? true : false}
-                inputRef={register({ required: true })}
-              />*/}
             </Card>
           </div>
         </div>
