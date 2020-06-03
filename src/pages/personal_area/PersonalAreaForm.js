@@ -17,6 +17,7 @@ import {
 } from "../../providers/redux/modules/bankCard";
 import { useForm } from "react-hook-form";
 import { RHFInput } from "react-hook-form-input";
+import Snackbar from "@material-ui/core/Snackbar";
 
 const PersonalAreaForm = props => {
   const {
@@ -31,6 +32,10 @@ const PersonalAreaForm = props => {
 
   const { register, handleSubmit, errors, reset, setValue } = useForm();
 
+  const [open, setOpen] = useState(false);
+  const [flag, setFlag] = useState(false);
+  const [messageFromServer, setMessageFromServer] = useState("");
+
   async function fetchBankCardData() {
     await fetchBankCardInformation(token);
   }
@@ -43,10 +48,22 @@ const PersonalAreaForm = props => {
     setValue("validity", validity);
     setValue("owner", owner);
     setValue("cvc", cvc);
+    if (flag === true) {
+      if (cardNumber.length > 0 && validity.length > 0) {
+        setMessageFromServer("Регистрация банковской карты прошла успешно");
+        setOpen(true);
+      } else {
+        setMessageFromServer("Не удалось зарегистрировать банковскую карту");
+        setOpen(true);
+      }
+    }
   }, [cardNumber, validity, owner, cvc, reset, setValue]);
 
   const handleCardParams = async data => {
     const { cardNumber, validity, owner, cvc } = data;
+
+    setFlag(true);
+
     await fetchRegistrateMyBankCard({
       cardNumber,
       validity,
@@ -55,6 +72,10 @@ const PersonalAreaForm = props => {
       token,
     });
     props.history.push("/personal");
+  };
+
+  const handleCloseSnackBar = () => {
+    setOpen(false);
   };
 
   return (
@@ -138,6 +159,18 @@ const PersonalAreaForm = props => {
           СОХРАНИТЬ
         </Button>
       </form>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        open={open}
+        onClose={handleCloseSnackBar}
+        ContentProps={{
+          "aria-describedby": "message-id",
+        }}
+        message={<span id="message-id">{messageFromServer}</span>}
+      />
     </div>
   );
 };

@@ -44,8 +44,13 @@ export function* geteratorForPaymentSaga(action) {
       cvc,
       token
     );
+    if (result.status === 200) {
+      const json_result = JSON.parse(result.config.data);
+
+      yield put(fetchRegistrateMyBankCardSuccess(json_result));
+    }
   } catch (error) {
-    put(fetchBankCardInformationFail(error));
+    put(fetchRegistrateMyBankCardFail(error));
   }
 }
 
