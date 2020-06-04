@@ -26,6 +26,13 @@ const FormForPoints = props => {
   }
 
   useEffect(() => {
+    if (
+      localStorage.getItem("first_point") != null &&
+      localStorage.getItem("second_point") != null
+    ) {
+      setFirstPoint(localStorage.getItem("first_point"));
+      setSecondPoint(localStorage.getItem("second_point"));
+    }
     if (adressList == null) {
       fetchAdresses();
     } else {
@@ -45,6 +52,7 @@ const FormForPoints = props => {
             return value.adress !== first_point;
           })
         );
+        localStorage.setItem("first_point", first_point);
       }
       if (second_point !== "" && second_point != null) {
         setAdressListWithKeyForFirstPoint(
@@ -52,6 +60,7 @@ const FormForPoints = props => {
             return value.adress !== second_point;
           })
         );
+        localStorage.setItem("second_point", second_point);
       }
     }
   }, [adressList, first_point, second_point]);
@@ -62,11 +71,11 @@ const FormForPoints = props => {
   };
 
   const handleFirstPointChange = event => {
-    setFirstPoint(event.target.innerHTML);
+    setFirstPoint(event);
   };
 
   const handleSecondPointChange = event => {
-    setSecondPoint(event.target.innerHTML);
+    setSecondPoint(event);
   };
 
   return (
@@ -77,6 +86,7 @@ const FormForPoints = props => {
           handleOfChangePoint={handleFirstPointChange}
           listOfObjects={adressListWithKeyForFirstPoint}
           nameOfLabel="Точка А"
+          mark="first_point"
         />
         <br />
         <InnerMap
@@ -84,6 +94,7 @@ const FormForPoints = props => {
           handleOfChangePoint={handleSecondPointChange}
           listOfObjects={adressListWithKeyForSecondPoint}
           nameOfLabel="Точка В"
+          mark="second_point"
         />
 
         <Button
