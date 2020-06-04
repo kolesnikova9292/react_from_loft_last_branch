@@ -42,7 +42,6 @@ const PersonalAreaForm = props => {
 
   useEffect(() => {
     if (cardNumber == null) {
-      console.log(888);
       fetchBankCardData();
     }
     setValue("cardNumber", cardNumber);

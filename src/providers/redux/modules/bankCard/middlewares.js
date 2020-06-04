@@ -8,7 +8,6 @@ import axios from "axios";
 
 export const loftTaxiMiddlewareForBankCard = store => next => async action => {
   if (action.type === fetchBankCardInformation.toString()) {
-    console.log(666);
     await axios
       .get("https://loft-taxi.glitch.me/card?token=" + action.payload)
       .then(data => {
