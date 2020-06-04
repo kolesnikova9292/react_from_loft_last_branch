@@ -39,7 +39,7 @@ export const fetchRegistrationRequestFirst = (
   surname
 ) => {
   const res = axios.post(
-    "http://loft-taxi.glitch.me/register",
+    "https://loft-taxi.glitch.me/register",
     { email: email, password: password, name: name, surname: surname },
     { headers: { "Content-Type": "application/json" } }
   );

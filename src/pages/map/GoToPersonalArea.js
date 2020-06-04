@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const GoToPersonalArea = () => {
   return (
@@ -12,7 +13,8 @@ const GoToPersonalArea = () => {
         className="buttonForWarning"
         variant="contained"
         color="primary"
-        href="/personal"
+        component={Link}
+        to="/personal"
       >
         Перейти в профиль
       </Button>

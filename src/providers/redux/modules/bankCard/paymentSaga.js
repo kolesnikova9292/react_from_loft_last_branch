@@ -25,7 +25,7 @@ export function* generatorForPaymentSagaGetInformation(action) {
       fetchBankCardInformationGetInfoAxios,
       action.payload
     );
-    if (result.statusText === "OK") {
+    if (result.status === 200) {
       yield put(fetchBankCardInformationSuccess(result));
     } else yield put(fetchBankCardInformationFail(result.data.error));
   } catch (error) {
@@ -77,5 +77,5 @@ export const fetchBankCardInformationRegistrateAxios = async (
 };
 
 export const fetchBankCardInformationGetInfoAxios = async token => {
-  return await axios.get("http://loft-taxi.glitch.me/card?token=" + token);
+  return await axios.get("https://loft-taxi.glitch.me/card?token=" + token);
 };

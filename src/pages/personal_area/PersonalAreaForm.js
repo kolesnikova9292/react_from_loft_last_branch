@@ -42,6 +42,7 @@ const PersonalAreaForm = props => {
 
   useEffect(() => {
     if (cardNumber == null) {
+      console.log(888);
       fetchBankCardData();
     }
     setValue("cardNumber", cardNumber);
@@ -79,17 +80,14 @@ const PersonalAreaForm = props => {
   };
 
   const cardNumderChanging = e => {
-    console.log(111);
-    console.log(e.target);
     const { value } = e.target;
-    console.log(value);
+
     if (!value) {
       e.target.value = "";
     }
     const match =
       value
         .replace(/\D/g, "")
-        // console.log(match);
         .substring(0, 16)
         .match(/.{1,4}/g) || [];
     e.target.value = match.join(" ");

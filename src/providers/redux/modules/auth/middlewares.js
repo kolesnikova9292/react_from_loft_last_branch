@@ -12,7 +12,7 @@ export const loftTaxiMiddleware = store => next => async action => {
   if (action.type === fetchAuthRequest.toString()) {
     await axios
       .post(
-        "http://loft-taxi.glitch.me/auth",
+        "https://loft-taxi.glitch.me/auth",
         { email: action.payload.login, password: action.payload.password },
         { headers: { "Content-Type": "application/json" } }
       )

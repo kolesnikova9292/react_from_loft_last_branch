@@ -24,7 +24,7 @@ export function* authGeneratorFunction(action) {
 
 export const fetchAuthRequestFirst = (login, password) => {
   const res = axios.post(
-    "http://loft-taxi.glitch.me/auth",
+    "https://loft-taxi.glitch.me/auth",
     { email: login, password: password },
     { headers: { "Content-Type": "application/json" } }
   );
